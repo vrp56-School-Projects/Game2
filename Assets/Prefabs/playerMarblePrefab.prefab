@@ -121,5 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373c667d1241bf54284a8332bafe5131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _directionMarker: {fileID: 1652489051567649476, guid: 56ef1ac3fce0c3346b67331529b8a7fe,
+    type: 3}
   force: 0.005
   direction: {x: 0, y: 0, z: 0.5}
