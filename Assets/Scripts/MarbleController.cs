@@ -18,6 +18,8 @@ public class MarbleController : MonoBehaviour
 
     [SerializeField]
     private GameObject _directionMarker;
+    [SerializeField]
+    private GameObject _powerMarker;
 
     [SerializeField]
     private float _placementSpeed = 2.0f;
@@ -112,6 +114,11 @@ public class MarbleController : MonoBehaviour
             _direction = Quaternion.AngleAxis(angle, Vector3.up) * _direction;
             _direction = _direction.normalized;
 
+            _powerMarker = Instantiate(_powerMarker, this.transform.position, Quaternion.identity);
+            Vector3 angles = _powerMarker.transform.eulerAngles;
+            angles.y = angle;
+            _powerMarker.transform.eulerAngles = angles;
+
             _currentState = State.POWER;
         }
     }
@@ -119,11 +126,19 @@ public class MarbleController : MonoBehaviour
     //Manage player selection of marble shooting power
     private void ManagePowerState()
     {
-        Rigidbody body = this.GetComponent<Rigidbody>();
-        body.AddForce(_direction * _maxVelocity, ForceMode.VelocityChange);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PowerMarkerController controller = _powerMarker.GetComponent<PowerMarkerController>();
+            controller.LockPower();
 
-        _currentState = State.INACTIVE;
-        Destroy(_directionMarker);
-        _directionMarker = null;
+            Rigidbody body = this.GetComponent<Rigidbody>();
+            body.AddForce(_direction * _maxVelocity * controller.GetPower(), ForceMode.VelocityChange);
+
+            _currentState = State.INACTIVE;
+            Destroy(_directionMarker);
+            Destroy(_powerMarker);
+        }
+
+        
     }
 }

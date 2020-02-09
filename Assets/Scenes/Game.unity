@@ -396,6 +396,12 @@ PrefabInstance:
       propertyPath: _placementSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3460531202277559413, guid: 89ab9004872265b49a8ade7d7b3ace77,
+        type: 3}
+      propertyPath: _powerMarker
+      value: 
+      objectReference: {fileID: 1652489051567649476, guid: 5437e35697a75d647be4eaa72984420a,
+        type: 3}
     - target: {fileID: 4598233330316168328, guid: 89ab9004872265b49a8ade7d7b3ace77,
         type: 3}
       propertyPath: m_LocalPosition.x
