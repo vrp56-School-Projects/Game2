@@ -55,4 +55,9 @@ public class DirectionMarkerController : MonoBehaviour
     {
         _rotationLocked = true;
     }
+
+    public float GetRotation()
+    {
+        return this.transform.localEulerAngles.y;
+    }
 }

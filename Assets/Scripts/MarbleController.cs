@@ -8,24 +8,30 @@ public class MarbleController : MonoBehaviour
     private enum State
     {
         INACTIVE,
+        PLACEMENT,
         DIRECTION,
         POWER
     }
 
     //Track the current state
-    private State _currentState = State.DIRECTION;
+    private State _currentState = State.PLACEMENT;
 
     [SerializeField]
     private GameObject _directionMarker;
 
     [SerializeField]
-    private float _maxVelocity = 3.0f;
-    public Vector3 direction = new Vector3(0.0f, 0.0f, 1.0f);
+    private float _placementSpeed = 2.0f;
+    [SerializeField]
+    private float _placementLimit = 1.7f;
+
+    [SerializeField]
+    private float _maxVelocity = 5.0f;
+    private Vector3 _direction = Vector3.forward;
 
     // Start is called before the first frame update
     void Start()
     {
-        _directionMarker = Instantiate(_directionMarker, this.transform.position, Quaternion.identity);
+        
     }
 
     private void Update()
@@ -34,6 +40,10 @@ public class MarbleController : MonoBehaviour
         switch(_currentState)
         {
             case State.INACTIVE:
+                break;
+
+            case State.PLACEMENT:
+                ManagePlacementState();
                 break;
 
             case State.DIRECTION:
@@ -47,21 +57,70 @@ public class MarbleController : MonoBehaviour
         
     }
 
+    //Manage player placement of the marble along the bottom edge of the board
+    private void ManagePlacementState()
+    {
+        //location selected
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _currentState = State.DIRECTION;
+            _directionMarker = Instantiate(_directionMarker, this.transform.position, Quaternion.identity);
+        }
+        //Moving Left
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            this.transform.Translate(Vector3.left * _placementSpeed * Time.deltaTime);
+
+            Vector3 pos = this.transform.position;
+
+            //Check bounds
+            if (pos.x < -_placementLimit)
+            {
+                pos.x = -_placementLimit;
+                this.transform.position = pos;
+            }
+        }
+        //Moing Right
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            this.transform.Translate(Vector3.right * _placementSpeed * Time.deltaTime);
+
+            Vector3 pos = this.transform.position;
+
+            //Check bounds
+            if (pos.x >_placementLimit)
+            {
+                pos.x = _placementLimit;
+                this.transform.position = pos;
+            }
+        }
+    }
+
+    //Manage player selection of marble shooting direction
     private void ManageDirectionState()
     {
         //if(_directionMarker.gameObject == null) _directionMarker = Instantiate(_directionMarker, this.transform);
 
+        //Direction selected
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _directionMarker.GetComponent<DirectionMarkerController>().LockRotation();
+            DirectionMarkerController controller = _directionMarker.GetComponent<DirectionMarkerController>();
+            controller.LockRotation();
+
+            float angle = controller.GetRotation();
+
+            _direction = Quaternion.AngleAxis(angle, Vector3.up) * _direction;
+            _direction = _direction.normalized;
+
             _currentState = State.POWER;
         }
     }
 
+    //Manage player selection of marble shooting power
     private void ManagePowerState()
     {
         Rigidbody body = this.GetComponent<Rigidbody>();
-        body.AddForce(direction * _maxVelocity, ForceMode.VelocityChange);
+        body.AddForce(_direction * _maxVelocity, ForceMode.VelocityChange);
 
         _currentState = State.INACTIVE;
         Destroy(_directionMarker);
