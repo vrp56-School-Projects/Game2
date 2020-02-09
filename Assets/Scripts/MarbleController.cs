@@ -18,6 +18,11 @@ public class MarbleController : MonoBehaviour
     [SerializeField]
     private int _hatIdTest = 0; //Testing purposes. Later will add functionality so player can choose a hat themselves.
 
+    [SerializeField]
+    private GameObject[] _trailIds; //0=No Trail, 1=Blue Trail, 2=Red Trail
+    [SerializeField]
+    private int _trailIdTest = 0; //Testing purposes. Later will add functionality so player can choose a trail themselves.
+
     //Track the current state
     private State _currentState = State.PLACEMENT;
 
@@ -39,6 +44,7 @@ public class MarbleController : MonoBehaviour
     void Start()
     {
         InstantiateHat(_hatIdTest);
+        InstantiateTrail(_trailIdTest);
     }
 
     private void Update()
@@ -66,13 +72,38 @@ public class MarbleController : MonoBehaviour
 
     void InstantiateHat(int _hatID)
     {
-        switch (_hatID)
+        if (_hatID < 0 || _hatID >= _trailIds.Length)
         {
-            case 0:
-                break;
-            default:
-                Instantiate(_hatIds[_hatID], this.gameObject.transform, true);
-                break;
+            Debug.LogError("MarbleController::InstantiateHat() Hat ID " + _hatID + " doesn't exist.");
+        }
+        else
+        {
+            switch (_hatID)
+            {
+                case 0:
+                    break;
+                default:
+                    Instantiate(_hatIds[_hatID], this.gameObject.transform, true);
+                    break;
+            }
+        }
+    }
+
+    void InstantiateTrail(int _trailId)
+    {
+        if (_trailId < 0 || _trailId >= _trailIds.Length)
+        {
+            Debug.LogError("MarbleController::InstantiateTrail() Trail ID " + _trailId + " doesn't exist.");
+        } else
+        {
+            switch (_trailId)
+            {
+                case 0:
+                    break;
+                default:
+                    Instantiate(_trailIds[_trailId], this.gameObject.transform, true);
+                    break;
+            }
         }
     }
 
