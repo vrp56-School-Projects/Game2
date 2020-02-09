@@ -18,7 +18,8 @@ public class MarbleController : MonoBehaviour
     [SerializeField]
     private GameObject _directionMarker;
 
-    public float force = 3.0f;
+    [SerializeField]
+    private float _maxVelocity = 3.0f;
     public Vector3 direction = new Vector3(0.0f, 0.0f, 1.0f);
 
     // Start is called before the first frame update
@@ -60,7 +61,7 @@ public class MarbleController : MonoBehaviour
     private void ManagePowerState()
     {
         Rigidbody body = this.GetComponent<Rigidbody>();
-        body.AddForce(direction * force, ForceMode.Impulse);
+        body.AddForce(direction * _maxVelocity, ForceMode.VelocityChange);
 
         _currentState = State.INACTIVE;
         Destroy(_directionMarker);
