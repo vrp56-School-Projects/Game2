@@ -13,6 +13,11 @@ public class MarbleController : MonoBehaviour
         POWER
     }
 
+    [SerializeField]
+    private GameObject[] _hatIds; //0=No Hat, 1=Blue Cube Hat, 2=Red Cube Hat
+    [SerializeField]
+    private int _hatIdTest = 0; //Testing purposes. Later will add functionality so player can choose a hat themselves.
+
     //Track the current state
     private State _currentState = State.PLACEMENT;
 
@@ -33,7 +38,7 @@ public class MarbleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InstantiateHat(_hatIdTest);
     }
 
     private void Update()
@@ -57,6 +62,18 @@ public class MarbleController : MonoBehaviour
                 break;
         }
         
+    }
+
+    void InstantiateHat(int _hatID)
+    {
+        switch (_hatID)
+        {
+            case 0:
+                break;
+            default:
+                Instantiate(_hatIds[_hatID], this.gameObject.transform, true);
+                break;
+        }
     }
 
     //Manage player placement of the marble along the bottom edge of the board
