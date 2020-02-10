@@ -427,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 3460531202277559413, guid: 89ab9004872265b49a8ade7d7b3ace77,
         type: 3}
       propertyPath: _hatIdTest
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3460531202277559413, guid: 89ab9004872265b49a8ade7d7b3ace77,
         type: 3}
@@ -444,7 +444,7 @@ PrefabInstance:
     - target: {fileID: 3460531202277559413, guid: 89ab9004872265b49a8ade7d7b3ace77,
         type: 3}
       propertyPath: _trailIdTest
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4598233330316168328, guid: 89ab9004872265b49a8ade7d7b3ace77,
         type: 3}
