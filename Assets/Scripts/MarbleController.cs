@@ -72,7 +72,7 @@ public class MarbleController : MonoBehaviour
 
     void InstantiateHat(int _hatID)
     {
-        if (_hatID < 0 || _hatID >= _trailIds.Length)
+        if (_hatID < 0 || _hatID >= _hatIds.Length)
         {
             Debug.LogError("MarbleController::InstantiateHat() Hat ID " + _hatID + " doesn't exist.");
         }
