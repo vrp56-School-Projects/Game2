@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7696717409775753404}
   - component: {fileID: 7696717409775753405}
   - component: {fileID: 7696717409775753406}
+  - component: {fileID: 3370971516480383502}
   m_Layer: 0
   m_Name: LeftArrow
   m_TagString: Untagged
@@ -92,6 +93,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3370971516480383502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7696717409775753407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e29196f0df5fe42afb1521e01d6ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _direction: -1
 --- !u!1 &7696717410252635870
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +162,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -205,14 +219,14 @@ MonoBehaviour:
   m_text: Spider-Webbed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294945024
+  m_fontColor: {r: 0, g: 0.6647904, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -306,6 +320,7 @@ GameObject:
   - component: {fileID: 7696717410686275404}
   - component: {fileID: 7696717410686275405}
   - component: {fileID: 7696717410686275406}
+  - component: {fileID: 2440981120438605532}
   m_Layer: 0
   m_Name: RightArrow
   m_TagString: Untagged
@@ -352,7 +367,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 400f9dd193fa3a8489f947f0dae2afc2, type: 2}
+  - {fileID: 2100000, guid: c57063a229068d54a8a1bdeafd188cba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -386,6 +401,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2440981120438605532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7696717410686275407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e29196f0df5fe42afb1521e01d6ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _direction: 1
 --- !u!1 &7696717410719884469
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7696717410719884468}
+  - component: {fileID: 5008709004551099374}
   m_Layer: 0
   m_Name: MenuOptionCyclerPrefab
   m_TagString: Untagged
@@ -420,6 +449,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5008709004551099374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7696717410719884469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d803c8cdedf2740a96453b85e91b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _optionNames: []
+  test: {fileID: 7696717410252635870}
 --- !u!1001 &8824192751374984899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -427,11 +470,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7696717410719884468}
     m_Modifications:
+    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
     - target: {fileID: 3333037481369760098, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5825666988526623178, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
     - target: {fileID: 7223543624742374407, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
         type: 3}
       propertyPath: m_LocalPosition.x
