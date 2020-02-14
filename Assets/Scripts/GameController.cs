@@ -9,11 +9,15 @@ public class GameController : MonoBehaviour
 
     private Anchor anchor;
     private DetectedPlane detectedPlane;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.enabled = false;
+        }
     }
 
     public void SetSelectedPlane(DetectedPlane detectedPlane)
@@ -27,7 +31,7 @@ public class GameController : MonoBehaviour
         // create an anchor position by raycasting a point to the center of the screen
         Vector2 position = new Vector2(Screen.width * .5f, Screen.height * .5f);
         Ray ray = FirstPersonCamera.ScreenPointToRay(position);
-        Vector3 anchorPosition = detectedPlane.CenterPose.position;
+        Vector3 anchorPosition = detectedPlane.CenterPose.position*10;
 
         // create an anchor at that point
         if (anchor != null)
@@ -36,11 +40,21 @@ public class GameController : MonoBehaviour
             DestroyObject(anchor);
 #pragma warning restore CS0618 // Type or member is obsolete
         }
+
         anchor = detectedPlane.CreateAnchor(new Pose(anchorPosition, Quaternion.identity));
+
 
         // attach the object to the anchor
         transform.position = anchorPosition;
         transform.SetParent(anchor.transform);
+
+
+
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.enabled = true;
+        }
+
     }
 
     // Update is called once per frame
@@ -58,6 +72,11 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        
+        while (detectedPlane.SubsumedBy != null)
+        {
+            detectedPlane = detectedPlane.SubsumedBy;
+        }
+
+
     }
 }
