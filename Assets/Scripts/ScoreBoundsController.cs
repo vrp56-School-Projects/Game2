@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class ScoreBoundsController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _camera;
+    [SerializeField]
+    private GameObject _scoringMarble;
+
+    private float _distance;
+    [SerializeField]
+    private float _actvationDistance = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.eulerAngles = new Vector3(90, 0, 0);
+        transform.eulerAngles = new Vector3(90, 0, 0); //Lock Rotation
+
+        _distance = Vector3.Distance(_camera.transform.position, transform.position); //Get dist to camera
+        if (_distance < _actvationDistance)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        } else
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 }

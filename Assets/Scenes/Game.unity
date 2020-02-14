@@ -269,6 +269,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+--- !u!1 &699289471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4134303879033943531, guid: b910d899036c02d418dbe00c5cf369de,
+    type: 3}
+  m_PrefabInstance: {fileID: 3929827643580430586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1631284879
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5c237d4017f0c4aa7990b8eb352933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 534669902}
+  _scoringMarble: {fileID: 699289471}
+  _actvationDistance: 5
 --- !u!1 &1876778187
 GameObject:
   m_ObjectHideFlags: 0
