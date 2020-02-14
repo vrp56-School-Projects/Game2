@@ -14,19 +14,16 @@ public class CycleOptionController : MonoBehaviour
 
     private TMPro.TextMeshPro _textMesh;
 
-    public GameObject test;
+    private PlayerOptionsController _playerOptionsControllerScript;
+
+    public GameObject SelectedOption;
 
     // Start is called before the first frame update
     void Start()
     {
-        //if (_optionNames.Length != _options.Length) Debug.Log("Error: The number of options and number of option names does not match!");
+        _playerOptionsControllerScript = this.GetComponentInParent<PlayerOptionsController>();
 
-        foreach(string name in _optionNames)
-        {
-            Debug.Log(name.ToString());
-        }
-
-        _textMesh = test.GetComponent<TMPro.TextMeshPro>();
+        _textMesh = SelectedOption.GetComponent<TMPro.TextMeshPro>();
         _textMesh.text = _optionNames[_currentIndex];
     }
 
@@ -41,6 +38,8 @@ public class CycleOptionController : MonoBehaviour
         //Cycle right and handle wrap-around
         _currentIndex = (_currentIndex + 1) % _optionNames.Length;
         _textMesh.text = _optionNames[_currentIndex];
+
+        _playerOptionsControllerScript.UpdateOptions();
     }
 
     public void CycleLeft()
@@ -48,5 +47,12 @@ public class CycleOptionController : MonoBehaviour
         //Cycle left and handle wrap-around
         _currentIndex = (_currentIndex + _optionNames.Length - 1) % _optionNames.Length;
         _textMesh.text = _optionNames[_currentIndex];
+
+        _playerOptionsControllerScript.UpdateOptions();
+    }
+
+    public int GetCurrentIndex()
+    {
+        return _currentIndex;
     }
 }
