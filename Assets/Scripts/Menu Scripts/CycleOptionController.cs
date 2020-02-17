@@ -27,12 +27,6 @@ public class CycleOptionController : MonoBehaviour
         _textMesh.text = _optionNames[_currentIndex];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CycleRight()
     {
         //Cycle right and handle wrap-around

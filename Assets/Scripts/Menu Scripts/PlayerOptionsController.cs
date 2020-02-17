@@ -31,12 +31,6 @@ public class PlayerOptionsController : MonoBehaviour
         _hatOptionController = _hatOption.GetComponent<CycleOptionController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void UpdateOptions()
     {
         int textureIndex = _textureOptionController.GetCurrentIndex();
@@ -47,5 +41,10 @@ public class PlayerOptionsController : MonoBehaviour
 
         int hatIndex = _hatOptionController.GetCurrentIndex();
         _sceneControllerScript.SetMarbleHat(hatIndex);
+    }
+
+    public void OptionsConfirmed()
+    {
+        _sceneControllerScript.MenuClosed();
     }
 }

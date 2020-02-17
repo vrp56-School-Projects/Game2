@@ -24,7 +24,8 @@ public class SceneController : MonoBehaviour
 
     private GameObject _demoMarble;
 
-    public GameObject Menu;
+    [SerializeField]
+    private GameObject _playerOptionsMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +33,10 @@ public class SceneController : MonoBehaviour
         _player1Marbles = new List<GameObject>();
         _player2Marbles = new List<GameObject>();
 
-        _demoMarble = Instantiate(_marblePrefab, new Vector3(Menu.transform.position.x, -0.55f, Menu.transform.position.z), Quaternion.identity, Menu.transform);
+        _demoMarble = Instantiate(_marblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
         _demoMarble.AddComponent<MarbleOrbitController>();
+
+        _playerOptionsMenu.GetComponent<MenuVisibilityController>().Show();
 
         SetMarbleTexture(0);
         SetMarbleTrail(0);
@@ -63,5 +66,10 @@ public class SceneController : MonoBehaviour
     public void SetMarbleHat(int index)
     {
         _demoMarble.GetComponent<MarbleController>().SetHat(_marbleHats[index]);
+    }
+
+    public void MenuClosed()
+    {
+        _playerOptionsMenu.GetComponent<MenuVisibilityController>().Hide();
     }
 }

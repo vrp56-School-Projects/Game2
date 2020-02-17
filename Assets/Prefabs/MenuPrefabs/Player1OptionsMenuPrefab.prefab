@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6188952374425264264}
   - component: {fileID: 5217239745189202277}
   - component: {fileID: 3583912798781510380}
+  - component: {fileID: 1296642280689158683}
   m_Layer: 0
   m_Name: ConfirmButton
   m_TagString: Untagged
@@ -92,6 +93,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1296642280689158683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472272140326964163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b026c1556ece60241919b39d7fa3e574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3840263417126293469
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +116,7 @@ GameObject:
   - component: {fileID: 249267839346178407}
   - component: {fileID: 114753389410689932}
   - component: {fileID: 114979539236407828}
+  - component: {fileID: 4895596962785365194}
   m_Layer: 0
   m_Name: Player1OptionsMenuPrefab
   m_TagString: Untagged
@@ -158,6 +172,18 @@ MonoBehaviour:
   _textureOption: {fileID: 4065543296843994757}
   _trailOption: {fileID: 2863721849682092855}
   _hatOption: {fileID: 454671796194693468}
+--- !u!114 &4895596962785365194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840263417126293469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c474e88fb8b61c244a6b0b758170a08d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2293836699323291712
 PrefabInstance:
   m_ObjectHideFlags: 0

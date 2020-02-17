@@ -15,12 +15,6 @@ public class CycleDirectionController : MonoBehaviour
         _cycleOptionScript = this.GetComponentInParent<CycleOptionController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnMouseDown()
     {
         //The Direction arrow has been clicked. Cycle the selected option in the configured direction
