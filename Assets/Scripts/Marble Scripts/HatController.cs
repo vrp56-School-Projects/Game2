@@ -16,6 +16,6 @@ public class HatController : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y + _hatHeight, transform.parent.position.z);
-        transform.eulerAngles = new Vector3(-90, 0, 0);
+        transform.eulerAngles = new Vector3(-90, transform.parent.eulerAngles.y, 0);
     }
 }

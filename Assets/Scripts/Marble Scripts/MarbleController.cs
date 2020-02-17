@@ -11,20 +11,13 @@ public class MarbleController : MonoBehaviour
         PLACEMENT,
         DIRECTION,
         POWER
-    }
-
-    [SerializeField]
-    private GameObject[] _hatIds; //0=No Hat, 1=Blue Cube Hat, 2=Red Cube Hat
-    [SerializeField]
-    private int _hatIdTest = 0; //Testing purposes. Later will add functionality so player can choose a hat themselves.
-
-    [SerializeField]
-    private GameObject[] _trailIds; //0=No Trail, 1=Blue Trail, 2=Red Trail
-    [SerializeField]
-    private int _trailIdTest = 0; //Testing purposes. Later will add functionality so player can choose a trail themselves.
+    }    
 
     //Track the current state
     private State _currentState = State.PLACEMENT;
+
+    private GameObject _marbleHat;
+    private GameObject _marbleTrail;
 
     [SerializeField]
     private GameObject _directionMarker;
@@ -43,8 +36,7 @@ public class MarbleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InstantiateHat(_hatIdTest);
-        InstantiateTrail(_trailIdTest);
+        
     }
 
     private void Update()
@@ -70,43 +62,6 @@ public class MarbleController : MonoBehaviour
         
     }
 
-    void InstantiateHat(int _hatID)
-    {
-        if (_hatID < 0 || _hatID >= _hatIds.Length)
-        {
-            Debug.LogError("MarbleController::InstantiateHat() Hat ID " + _hatID + " doesn't exist.");
-        }
-        else
-        {
-            switch (_hatID)
-            {
-                case 0:
-                    break;
-                default:
-                    Instantiate(_hatIds[_hatID], this.gameObject.transform, true);
-                    break;
-            }
-        }
-    }
-
-    void InstantiateTrail(int _trailId)
-    {
-        if (_trailId < 0 || _trailId >= _trailIds.Length)
-        {
-            Debug.LogError("MarbleController::InstantiateTrail() Trail ID " + _trailId + " doesn't exist.");
-        } else
-        {
-            switch (_trailId)
-            {
-                case 0:
-                    break;
-                default:
-                    Instantiate(_trailIds[_trailId], this.gameObject.transform, true);
-                    break;
-            }
-        }
-    }
-
     //Manage player placement of the marble along the bottom edge of the board
     private void ManagePlacementState()
     {
@@ -130,7 +85,7 @@ public class MarbleController : MonoBehaviour
                 this.transform.position = pos;
             }
         }
-        //Moing Right
+        //Moving Right
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             this.transform.Translate(Vector3.right * _placementSpeed * Time.deltaTime);
@@ -149,8 +104,6 @@ public class MarbleController : MonoBehaviour
     //Manage player selection of marble shooting direction
     private void ManageDirectionState()
     {
-        //if(_directionMarker.gameObject == null) _directionMarker = Instantiate(_directionMarker, this.transform);
-
         //Direction selected
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -185,8 +138,18 @@ public class MarbleController : MonoBehaviour
             _currentState = State.INACTIVE;
             Destroy(_directionMarker);
             Destroy(_powerMarker);
-        }
+        }        
+    }
 
-        
+    public void SetHat(GameObject hat)
+    {
+        Destroy(_marbleHat);
+        _marbleHat = Instantiate(hat, this.gameObject.transform, true);
+    }
+
+    public void SetTrail(GameObject trail)
+    {
+        Destroy(_marbleTrail);
+        _marbleTrail = Instantiate(trail, this.gameObject.transform, true);
     }
 }
