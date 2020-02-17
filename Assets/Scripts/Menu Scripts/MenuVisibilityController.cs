@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class MenuVisibilityController : MonoBehaviour
 {
-    private Renderer _renderer;
-
     // Start is called before the first frame update
     void Start()
     {
-        _renderer = this.GetComponent<Renderer>();
-        _renderer.enabled = false;
+        this.Hide();
     }
 
     public void Show()
     {
-        _renderer.enabled = true;
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.enabled = true;
+        }
     }
 
     public void Hide()
     {
-        _renderer.enabled = false;
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.enabled = false;
+        }
     }
 }
