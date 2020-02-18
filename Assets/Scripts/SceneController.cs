@@ -14,7 +14,10 @@ public class SceneController : MonoBehaviour
     private GameObject[] _marbleHats;
 
     [SerializeField]
-    private GameObject _marblePrefab;
+    private GameObject _playerMarblePrefab;
+
+    [SerializeField]
+    private GameObject _scoringMarblePrefab;
 
     [SerializeField]
     private Vector3 _marbleStartPosition;
@@ -33,7 +36,7 @@ public class SceneController : MonoBehaviour
         _player1Marbles = new List<GameObject>();
         _player2Marbles = new List<GameObject>();
 
-        _demoMarble = Instantiate(_marblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+        _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
         _demoMarble.AddComponent<MarbleOrbitController>();
 
         _playerOptionsMenu.GetComponent<MenuVisibilityController>().Show();
@@ -71,5 +74,27 @@ public class SceneController : MonoBehaviour
     public void MenuClosed()
     {
         _playerOptionsMenu.GetComponent<MenuVisibilityController>().Hide();
+    }
+
+    public int CalculateScore(List<GameObject> playerMarbles)
+    {
+        int _points = 0;
+        for (int i = 0; i < playerMarbles.Count; i++)
+        {
+            //For each marble, add their distances to the scoring marble together
+            float _individualDistance = Vector3.Distance(_scoringMarblePrefab.transform.position, playerMarbles[i].transform.position);
+            if (_individualDistance < 0.4f)
+            {
+                _points += 5;
+            } else if (_individualDistance < 0.75f && _individualDistance > 0.4f)
+            {
+                _points += 3;
+            } else if (_individualDistance < 1.05f && _individualDistance > 0.75f)
+            {
+                _points += 1;
+            }
+            //No points if outside 1.05 units, or out of bounds. So do nothing.
+        }
+        return _points;
     }
 }
