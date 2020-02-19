@@ -17,6 +17,9 @@ public class SceneController : MonoBehaviour
     private GameObject _playerMarblePrefab;
 
     [SerializeField]
+    private GameObject _demoMarblePrefab;
+
+    [SerializeField]
     private GameObject _scoringMarblePrefab;
 
     [SerializeField]
@@ -64,7 +67,7 @@ public class SceneController : MonoBehaviour
 
         //Create and show the menu with the orbiting marble
         _playerOptionsMenu = Instantiate(_playerOptionsMenuPrefab);
-        _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+        _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
         _demoMarble.AddComponent<MarbleOrbitController>();
         SetMarbleTexture(0);
         SetMarbleTrail(0);
@@ -142,7 +145,7 @@ public class SceneController : MonoBehaviour
                 Destroy(_playerOptionsMenu);
 
                 _playerOptionsMenu = Instantiate(_playerOptionsMenuPrefab);
-                _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+                _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
                 _demoMarble.AddComponent<MarbleOrbitController>();
 
                 _currentState = GameState.PLAYER2_OPTIONS;
@@ -207,8 +210,10 @@ public class SceneController : MonoBehaviour
         if (_player2Marbles.Count >= 5)
         {
             _currentState = GameState.END_GAME;
-            //int score1 = CalculateScore(_player1Marbles);
-            //int score2 = CalculateScore(_player2Marbles);
+            int score1 = CalculateScore(_player1Marbles);
+            int score2 = CalculateScore(_player2Marbles);
+            Debug.Log(score1);
+            Debug.Log(score2);
         }
         else SpawnPlayerMarble();
     }
