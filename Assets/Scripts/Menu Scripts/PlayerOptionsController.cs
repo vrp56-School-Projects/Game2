@@ -23,7 +23,20 @@ public class PlayerOptionsController : MonoBehaviour
     void Start()
     {
         //Gain access to the scene controller
-        _sceneControllerScript = GetComponentInParent<SceneController>();
+        GameObject[] objects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+
+        foreach(GameObject obj in objects)
+        {
+            SceneController ctrl = obj.GetComponent<SceneController>();
+
+            if(ctrl != null)
+            {
+                _sceneControllerScript = ctrl;
+                break;
+            }
+        }
+
+        //_sceneControllerScript = GetComponentInParent<SceneController>();
         _textureOptionController = _textureOption.GetComponent<CycleOptionController>();
         _trailOptionController = _trailOption.GetComponent<CycleOptionController>();
         _hatOptionController = _hatOption.GetComponent<CycleOptionController>();

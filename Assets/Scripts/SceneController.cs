@@ -142,11 +142,12 @@ public class SceneController : MonoBehaviour
                 _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
                 _demoMarble.AddComponent<MarbleOrbitController>();
 
+                _currentState = GameState.PLAYER2_OPTIONS;
+
                 SetMarbleTexture(0);
                 SetMarbleTrail(0);
                 SetMarbleHat(0);
-
-                _currentState = GameState.PLAYER2_OPTIONS;
+                _playerOptionsMenu.GetComponent<MenuVisibilityController>().Show();
                 break;
 
             case GameState.PLAYER2_OPTIONS:
@@ -173,12 +174,14 @@ public class SceneController : MonoBehaviour
                 marble.GetComponent<Renderer>().material = _marbleTextures[_player1TextureIndex];
                 script.SetTrail(_marbleTrails[_player1TrailIndex]);
                 script.SetHat(_marbleHats[_player1HatIndex]);
+                _player1Marbles.Add(marble);
                 break;
 
             case GameState.PLAYER2_TURN:
                 marble.GetComponent<Renderer>().material = _marbleTextures[_player2TextureIndex];
                 script.SetTrail(_marbleTrails[_player2TrailIndex]);
                 script.SetHat(_marbleHats[_player2HatIndex]);
+                _player2Marbles.Add(marble);
                 break;
         }
     }
@@ -201,8 +204,8 @@ public class SceneController : MonoBehaviour
         if (_player2Marbles.Count >= 5)
         {
             _currentState = GameState.END_GAME;
-            //int CalculateScore(_player1Marbles);
-            //int CalculateScore(_player2Marbles);
+            //int score1 = CalculateScore(_player1Marbles);
+            //int score2 = CalculateScore(_player2Marbles);
         }
         else SpawnPlayerMarble();
     }
