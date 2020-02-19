@@ -5,9 +5,6 @@ using UnityEngine;
 public class PlayerOptionsController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _sceneController;
-
-    [SerializeField]
     private GameObject _textureOption;
 
     [SerializeField]
@@ -25,7 +22,21 @@ public class PlayerOptionsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _sceneControllerScript = _sceneController.GetComponent<SceneController>();
+        //Gain access to the scene controller
+        GameObject[] objects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+
+        foreach(GameObject obj in objects)
+        {
+            SceneController ctrl = obj.GetComponent<SceneController>();
+
+            if(ctrl != null)
+            {
+                _sceneControllerScript = ctrl;
+                break;
+            }
+        }
+
+        //_sceneControllerScript = GetComponentInParent<SceneController>();
         _textureOptionController = _textureOption.GetComponent<CycleOptionController>();
         _trailOptionController = _trailOption.GetComponent<CycleOptionController>();
         _hatOptionController = _hatOption.GetComponent<CycleOptionController>();

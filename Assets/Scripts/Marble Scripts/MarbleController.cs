@@ -33,10 +33,28 @@ public class MarbleController : MonoBehaviour
     private float _maxVelocity = 5.0f;
     private Vector3 _direction = Vector3.forward;
 
+    private Rigidbody _rigidBody;
+    private SceneController _sceneController;
+    private bool _isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _rigidBody = GetComponent<Rigidbody>();
+
+        //Gain access to the scene controller
+        GameObject[] objects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+
+        foreach (GameObject obj in objects)
+        {
+            SceneController ctrl = obj.GetComponent<SceneController>();
+
+            if (ctrl != null)
+            {
+                _sceneController = ctrl;
+                break;
+            }
+        }
     }
 
     private void Update()
@@ -60,6 +78,15 @@ public class MarbleController : MonoBehaviour
                 break;
         }
         
+    }
+
+    private void FixedUpdate()
+    {
+        if(_rigidBody.IsSleeping() && _currentState == State.INACTIVE && !_isDead)
+        {
+            _isDead = true;
+            _sceneController.EndTurn();
+        }
     }
 
     //Manage player placement of the marble along the bottom edge of the board
@@ -135,9 +162,10 @@ public class MarbleController : MonoBehaviour
             Rigidbody body = this.GetComponent<Rigidbody>();
             body.AddForce(_direction * _maxVelocity * controller.GetPower(), ForceMode.VelocityChange);
 
-            _currentState = State.INACTIVE;
             Destroy(_directionMarker);
             Destroy(_powerMarker);
+
+            _currentState = State.INACTIVE;
         }        
     }
 
