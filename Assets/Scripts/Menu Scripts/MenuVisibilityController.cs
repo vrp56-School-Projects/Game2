@@ -7,7 +7,7 @@ public class MenuVisibilityController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.Hide();
+        //this.Hide();
     }
 
     public void Show()
