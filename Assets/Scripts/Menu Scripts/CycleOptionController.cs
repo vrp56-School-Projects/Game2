@@ -16,6 +16,9 @@ public class CycleOptionController : MonoBehaviour
 
     private PlayerOptionsController _playerOptionsControllerScript;
 
+    [SerializeField]
+    private AudioSource _audioSource;
+
     public GameObject SelectedOption;
 
     // Start is called before the first frame update
@@ -33,6 +36,8 @@ public class CycleOptionController : MonoBehaviour
         _currentIndex = (_currentIndex + 1) % _optionNames.Length;
         _textMesh.text = _optionNames[_currentIndex];
 
+        _audioSource.PlayOneShot(_audioSource.clip);
+
         _playerOptionsControllerScript.UpdateOptions();
     }
 
@@ -41,6 +46,8 @@ public class CycleOptionController : MonoBehaviour
         //Cycle left and handle wrap-around
         _currentIndex = (_currentIndex + _optionNames.Length - 1) % _optionNames.Length;
         _textMesh.text = _optionNames[_currentIndex];
+
+        _audioSource.PlayOneShot(_audioSource.clip);
 
         _playerOptionsControllerScript.UpdateOptions();
     }
