@@ -439,6 +439,10 @@ MonoBehaviour:
   _marbleStartPosition: {x: 0, y: 0.03, z: -3}
   _playerOptionsMenuPrefab: {fileID: 3840263417126293469, guid: f1e38e8c89a178e4dabd7b46961f8db2,
     type: 3}
+  _redScore: 1
+  _whiteScore: 3
+  _blackScore: 5
+  _outOfBoundsScore: 6
 --- !u!1001 &3210115887354458184
 PrefabInstance:
   m_ObjectHideFlags: 0

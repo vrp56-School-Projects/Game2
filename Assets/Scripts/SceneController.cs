@@ -44,6 +44,9 @@ public class SceneController : MonoBehaviour
 
     private GameObject _playerOptionsMenu;
 
+    [SerializeField]
+    private int _redScore, _whiteScore, _blackScore, _outOfBoundsScore;
+
     //The Possible Game States
     private enum GameState
     {
@@ -223,19 +226,21 @@ public class SceneController : MonoBehaviour
         int _points = 0;
         for (int i = 0; i < playerMarbles.Count; i++)
         {
-            //For each marble, add their distances to the scoring marble together
             float _individualDistance = Vector3.Distance(_scoringMarblePrefab.transform.position, playerMarbles[i].transform.position);
             if (_individualDistance < 0.4f)
             {
-                _points += 5;
+                _points += _redScore;
             } else if (_individualDistance < 0.75f && _individualDistance > 0.4f)
             {
-                _points += 3;
+                _points += _whiteScore;
             } else if (_individualDistance < 1.05f && _individualDistance > 0.75f)
             {
-                _points += 1;
+                _points += _blackScore;
+            } else
+            {
+                _points += _outOfBoundsScore;
             }
-            //No points if outside 1.05 units, or out of bounds. So do nothing.
+            
         }
         return _points;
     }
