@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class MenuConfirmationController : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource _audioSource;
+
     private void OnMouseDown()
     {
+        _audioSource.PlayOneShot(_audioSource.clip);
         this.GetComponentInParent<PlayerOptionsController>().OptionsConfirmed();
     }
 }

@@ -135,27 +135,19 @@ public class SceneController : MonoBehaviour
             case GameState.PLAYER1_OPTIONS:
                 _playerOptionsMenu.GetComponent<MenuVisibilityController>().Hide();
 
-                Destroy(_demoMarble);
-                Destroy(_playerOptionsMenu);
-
-                _playerOptionsMenu = Instantiate(_playerOptionsMenuPrefab);
-                _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
-                _demoMarble.AddComponent<MarbleOrbitController>();
-
                 _currentState = GameState.PLAYER2_OPTIONS;
 
                 SetMarbleTexture(0);
                 SetMarbleTrail(0);
                 SetMarbleHat(0);
+
+                //Change menu title
+
                 _playerOptionsMenu.GetComponent<MenuVisibilityController>().Show();
                 break;
 
             case GameState.PLAYER2_OPTIONS:
                 _playerOptionsMenuPrefab.GetComponent<MenuVisibilityController>().Hide();
-
-                Destroy(_demoMarble);
-                Destroy(_playerOptionsMenu);
-
                 _currentState = GameState.PLAYER1_TURN;
                 SpawnPlayerMarble();
                 break;
