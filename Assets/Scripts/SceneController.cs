@@ -17,6 +17,12 @@ public class SceneController : MonoBehaviour
     private GameObject _playerMarblePrefab;
 
     [SerializeField]
+    private GameObject _demoMarblePrefab;
+
+    [SerializeField]
+    private GameObject _scoringMarblePrefab;
+
+    [SerializeField]
     private Vector3 _marbleStartPosition;
 
     //Player 1 Information
@@ -37,6 +43,9 @@ public class SceneController : MonoBehaviour
     private GameObject _playerOptionsMenuPrefab;
 
     private GameObject _playerOptionsMenu;
+
+    [SerializeField]
+    private int _redScore, _whiteScore, _blackScore, _outOfBoundsScore;
 
     //The Possible Game States
     private enum GameState
@@ -61,7 +70,7 @@ public class SceneController : MonoBehaviour
 
         //Create and show the menu with the orbiting marble
         _playerOptionsMenu = Instantiate(_playerOptionsMenuPrefab);
-        _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+        _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
         _demoMarble.AddComponent<MarbleOrbitController>();
         SetMarbleTexture(0);
         SetMarbleTrail(0);
@@ -139,7 +148,7 @@ public class SceneController : MonoBehaviour
                 Destroy(_playerOptionsMenu);
 
                 _playerOptionsMenu = Instantiate(_playerOptionsMenuPrefab);
-                _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+                _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
                 _demoMarble.AddComponent<MarbleOrbitController>();
 
                 _currentState = GameState.PLAYER2_OPTIONS;
@@ -204,9 +213,35 @@ public class SceneController : MonoBehaviour
         if (_player2Marbles.Count >= 5)
         {
             _currentState = GameState.END_GAME;
-            //int score1 = CalculateScore(_player1Marbles);
-            //int score2 = CalculateScore(_player2Marbles);
+            int score1 = CalculateScore(_player1Marbles);
+            int score2 = CalculateScore(_player2Marbles);
+            Debug.Log(score1);
+            Debug.Log(score2);
         }
         else SpawnPlayerMarble();
+    }
+
+    public int CalculateScore(List<GameObject> playerMarbles)
+    {
+        int _points = 0;
+        for (int i = 0; i < playerMarbles.Count; i++)
+        {
+            float _individualDistance = Vector3.Distance(_scoringMarblePrefab.transform.position, playerMarbles[i].transform.position);
+            if (_individualDistance < 0.4f)
+            {
+                _points += _redScore;
+            } else if (_individualDistance < 0.75f && _individualDistance > 0.4f)
+            {
+                _points += _whiteScore;
+            } else if (_individualDistance < 1.05f && _individualDistance > 0.75f)
+            {
+                _points += _blackScore;
+            } else
+            {
+                _points += _outOfBoundsScore;
+            }
+            
+        }
+        return _points;
     }
 }
