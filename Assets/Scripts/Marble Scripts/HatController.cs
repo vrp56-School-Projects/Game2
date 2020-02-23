@@ -16,6 +16,14 @@ public class HatController : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y + _hatHeight, transform.parent.position.z);
-        transform.eulerAngles = new Vector3(-90, transform.parent.eulerAngles.y, 0);
+
+        if (transform.parent.tag == "demoMarble")
+        {
+            transform.eulerAngles = new Vector3(-90, transform.parent.eulerAngles.y, 0);
+        } else
+        {
+            transform.eulerAngles = new Vector3(-90, 0, 0);
+        }
+        
     }
 }
