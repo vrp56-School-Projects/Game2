@@ -34,7 +34,9 @@ public class SceneController : MonoBehaviour
     private GameObject _demoMarble;
 
     [SerializeField]
-    private GameObject _playerOptionsMenuPrefab;
+    private GameObject _player1OptionsMenuPrefab;
+    [SerializeField]
+    private GameObject _player2OptionsMenuPrefab;
 
     private GameObject _playerOptionsMenu;
 
@@ -60,7 +62,7 @@ public class SceneController : MonoBehaviour
         _player2Marbles = new List<GameObject>();
 
         //Create and show the menu with the orbiting marble
-        _playerOptionsMenu = Instantiate(_playerOptionsMenuPrefab);
+        _playerOptionsMenu = Instantiate(_player1OptionsMenuPrefab);
         _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
         _demoMarble.AddComponent<MarbleOrbitController>();
         SetMarbleTexture(0);
@@ -135,19 +137,29 @@ public class SceneController : MonoBehaviour
             case GameState.PLAYER1_OPTIONS:
                 _playerOptionsMenu.GetComponent<MenuVisibilityController>().Hide();
 
+                Destroy(_demoMarble);
+                Destroy(_playerOptionsMenu, 0.25f);
+
+                _playerOptionsMenu = Instantiate(_player2OptionsMenuPrefab);
+
+                _demoMarble = Instantiate(_playerMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+                _demoMarble.AddComponent<MarbleOrbitController>();
+
                 _currentState = GameState.PLAYER2_OPTIONS;
 
                 SetMarbleTexture(0);
                 SetMarbleTrail(0);
                 SetMarbleHat(0);
 
-                //Change menu title
-
                 _playerOptionsMenu.GetComponent<MenuVisibilityController>().Show();
                 break;
 
             case GameState.PLAYER2_OPTIONS:
-                _playerOptionsMenuPrefab.GetComponent<MenuVisibilityController>().Hide();
+                _playerOptionsMenu.GetComponent<MenuVisibilityController>().Hide();
+
+                Destroy(_demoMarble);
+                Destroy(_playerOptionsMenu, 0.25f);
+
                 _currentState = GameState.PLAYER1_TURN;
                 SpawnPlayerMarble();
                 break;

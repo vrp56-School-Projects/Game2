@@ -10,6 +10,7 @@ public class MenuConfirmationController : MonoBehaviour
     private void OnMouseDown()
     {
         _audioSource.PlayOneShot(_audioSource.clip);
+        //AudioSource.PlayClipAtPoint(_audioSource.clip, Camera.main.transform.position);
         this.GetComponentInParent<PlayerOptionsController>().OptionsConfirmed();
     }
 }

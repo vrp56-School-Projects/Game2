@@ -257,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.3420181, y: 0.001164006, z: -0.0031980805, w: 0.93968725}
-  m_LocalPosition: {x: -0, y: 4.4, z: -6.11}
+  m_LocalPosition: {x: -0, y: 4.17, z: -6.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -359,7 +359,9 @@ MonoBehaviour:
   _playerMarblePrefab: {fileID: 4598233330316168331, guid: 89ab9004872265b49a8ade7d7b3ace77,
     type: 3}
   _marbleStartPosition: {x: 0, y: 0.03, z: -3}
-  _playerOptionsMenuPrefab: {fileID: 3840263417126293469, guid: f1e38e8c89a178e4dabd7b46961f8db2,
+  _player1OptionsMenuPrefab: {fileID: 3840263417126293469, guid: f1e38e8c89a178e4dabd7b46961f8db2,
+    type: 3}
+  _player2OptionsMenuPrefab: {fileID: 8614576937753966870, guid: 74d2652ec74ac7c48b4bef242d9b6a08,
     type: 3}
 --- !u!1001 &3210115887354458184
 PrefabInstance:
