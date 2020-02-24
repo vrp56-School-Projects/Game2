@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
 public class ScoreBoundsController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _camera;
+    private Camera _camera;
     [SerializeField]
     private GameObject _scoringMarble;
 
@@ -16,7 +17,7 @@ public class ScoreBoundsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _camera = Camera.main;
     }
 
     // Update is called once per frame

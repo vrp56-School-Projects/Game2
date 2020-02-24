@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
 public class PlayerOptionsController : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class PlayerOptionsController : MonoBehaviour
 
         foreach(GameObject obj in objects)
         {
-            SceneController ctrl = obj.GetComponent<SceneController>();
+            SceneController ctrl = obj.GetComponentInChildren<SceneController>();
 
             if(ctrl != null)
             {
@@ -35,6 +36,8 @@ public class PlayerOptionsController : MonoBehaviour
                 break;
             }
         }
+
+       
 
         //_sceneControllerScript = GetComponentInParent<SceneController>();
         _textureOptionController = _textureOption.GetComponent<CycleOptionController>();

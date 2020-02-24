@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
 public class MarbleController : MonoBehaviour
 {
@@ -47,7 +48,8 @@ public class MarbleController : MonoBehaviour
 
         foreach (GameObject obj in objects)
         {
-            SceneController ctrl = obj.GetComponent<SceneController>();
+            ARSessionOrigin orig = obj.GetComponent<ARSessionOrigin>();
+            SceneController ctrl = orig.GetComponent<SceneController>();
 
             if (ctrl != null)
             {

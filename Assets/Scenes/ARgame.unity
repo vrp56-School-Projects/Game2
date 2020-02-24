@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 385523781}
   m_Layer: 0
   m_Name: AR Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,6 +243,80 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1054712511}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &441102639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 441102641}
+  - component: {fileID: 441102640}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &441102640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441102639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f4c1b8ce05a61479d8ceed5b89ff9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _marbleTextures:
+  - {fileID: 2100000, guid: 675d0ad90239d1f4b923cbbef1e3b326, type: 2}
+  - {fileID: 2100000, guid: b639912729b109b4f88b8a641da8a8ef, type: 2}
+  - {fileID: 2100000, guid: 3df2b4cb33937e545906f1fc19082b78, type: 2}
+  - {fileID: 2100000, guid: ff41bb6a9cf4d6f438cdee7bd47395a6, type: 2}
+  - {fileID: 2100000, guid: 0e49cc6cceab70644b5bbb27ae79fe82, type: 2}
+  - {fileID: 2100000, guid: 9c2523af588f8934bb6dba605ca927dc, type: 2}
+  _marbleTrails:
+  - {fileID: 6169260738191477064, guid: 3a89f226b0b000041aa1553b3dcd3ad6, type: 3}
+  - {fileID: 2553959130032721259, guid: 11057b82e34a28542988700e2b03d4f1, type: 3}
+  _marbleHats:
+  - {fileID: 1678697728494858, guid: dff0bf2755899aa42b52671dd5683233, type: 3}
+  - {fileID: 1981257420499984, guid: ff4fbc970ff92a647a6f0a9b9a6ab6d2, type: 3}
+  - {fileID: 1596853484811122, guid: 032fbc761864ad94ba07c78f0ccbb2a0, type: 3}
+  - {fileID: 1160420858043324, guid: dae77ae7b43f957448d5432414d26636, type: 3}
+  - {fileID: 1130866804316302, guid: c187fc3ea1549d84c846ce220fecb9ef, type: 3}
+  - {fileID: 1644363884628856, guid: d0b9009f4d67bc0429a106a40e46d39d, type: 3}
+  - {fileID: 1958457237189148, guid: c679c2da1e24e6b47aa8615de8a97aa0, type: 3}
+  - {fileID: 1687934591321452, guid: d7bb95bb746a0c44b9af9088e42d0357, type: 3}
+  _playerMarblePrefab: {fileID: 4598233330316168331, guid: 89ab9004872265b49a8ade7d7b3ace77,
+    type: 3}
+  _demoMarblePrefab: {fileID: 478818827253009833, guid: 58938d3b0a45b574eb8fab2164f0c8cc,
+    type: 3}
+  _scoringMarblePrefab: {fileID: 0}
+  _marbleStartPosition: {x: 0, y: 0.03, z: -2.85}
+  _playerOptionsMenuPrefab: {fileID: 3840263417126293469, guid: f1e38e8c89a178e4dabd7b46961f8db2,
+    type: 3}
+  _redScore: 1
+  _whiteScore: 3
+  _blackScore: 5
+  _outOfBoundsScore: 6
+--- !u!4 &441102641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441102639}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.15474951, z: 0.05443287}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1054712511}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054712509
@@ -290,6 +364,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 441102641}
   - {fileID: 385523784}
   - {fileID: 1542450366}
   m_Father: {fileID: 0}
@@ -348,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678200858ac731a4aa9b1798c544c4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlacedPrefab: {fileID: 3621358996699483331, guid: 1bdfe91e27724ee4c8c6394b6ba6a872,
+  m_PlacedPrefab: {fileID: 6477376320900647734, guid: 38e3167f34fff2e47b2e6c1afbd4b9ae,
     type: 3}
 --- !u!1 &1471433563
 GameObject:
@@ -505,7 +580,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1054712511}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1124505758500484308
 PrefabInstance:
