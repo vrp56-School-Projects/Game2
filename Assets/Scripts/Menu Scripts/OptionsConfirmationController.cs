@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuConfirmationController : MonoBehaviour
+public class OptionsConfirmationController : MonoBehaviour
 {
     [SerializeField]
     private AudioSource _audioSource;
@@ -11,6 +11,6 @@ public class MenuConfirmationController : MonoBehaviour
     {
         _audioSource.PlayOneShot(_audioSource.clip);
         //AudioSource.PlayClipAtPoint(_audioSource.clip, Camera.main.transform.position);
-        this.GetComponentInParent<PlayerOptionsController>().OptionsConfirmed();
+        GetComponentInParent<PlayerOptionsController>().OptionsConfirmed();
     }
 }
