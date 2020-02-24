@@ -149,7 +149,7 @@ public class SceneController : MonoBehaviour
                 Destroy(_demoMarble);
                 Destroy(_playerOptionsMenu, 0.25f);
 
-                _playerOptionsMenu = Instantiate(_player2OptionsMenuPrefab);
+                
 
                 _playerOptionsMenu = Instantiate(_player2OptionsMenuPrefab);
                 _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
