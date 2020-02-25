@@ -38,17 +38,24 @@ public class PlaceOnPlane : MonoBehaviour
         m_SessionOrigin = GetComponent<ARSessionOrigin>();
         m_ARPlaneManager = GetComponent<ARPlaneManager>();
         m_RaycastManager = GetComponent<ARRaycastManager>();
+        m_ARPointCloudManager = GetComponent<ARPointCloudManager>();
 
         m_SessionOrigin.transform.localScale = new Vector3(10, 10, 10);
     }
 
     private void StopPlaneDetection()
     {
+        m_ARPointCloudManager.enabled = false;
         m_ARPlaneManager.enabled = false;
 
         foreach (ARPlane plane in m_ARPlaneManager.trackables)
         {
             plane.gameObject.SetActive(m_ARPlaneManager.enabled);
+        }
+
+        foreach (ARPointCloud pointCloud in m_ARPointCloudManager.trackables)
+        {
+            pointCloud.gameObject.SetActive(m_ARPointCloudManager.enabled);
         }
     }
 
@@ -88,4 +95,5 @@ public class PlaceOnPlane : MonoBehaviour
     ARSessionOrigin m_SessionOrigin;
     ARPlaneManager m_ARPlaneManager;
     ARRaycastManager m_RaycastManager;
+    ARPointCloudManager m_ARPointCloudManager;
 }

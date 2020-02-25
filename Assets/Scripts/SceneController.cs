@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
 public class SceneController : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class SceneController : MonoBehaviour
         _player2Marbles = new List<GameObject>();
 
         //Create and show the menu with the orbiting marble
+
         _playerOptionsMenu = Instantiate(_playerOptionsMenuPrefab);
         _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
         _demoMarble.AddComponent<MarbleOrbitController>();
