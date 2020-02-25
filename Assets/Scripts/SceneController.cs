@@ -43,8 +43,10 @@ public class SceneController : MonoBehaviour
     private GameObject _player1OptionsMenuPrefab;
     [SerializeField]
     private GameObject _player2OptionsMenuPrefab;
+    [SerializeField]
+    private GameObject _scoreViewPrefab;
 
-    private GameObject _playerOptionsMenu;
+    private GameObject _activeMenu;
 
     [SerializeField]
     private int _redScore, _whiteScore, _blackScore, _outOfBoundsScore;
@@ -71,13 +73,13 @@ public class SceneController : MonoBehaviour
         _player2Marbles = new List<GameObject>();
 
         //Create and show the menu with the orbiting marble
-        _playerOptionsMenu = Instantiate(_player1OptionsMenuPrefab);
-        _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+        _activeMenu = Instantiate(_player1OptionsMenuPrefab);
+        _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_activeMenu.transform.position.x, -0.55f, _activeMenu.transform.position.z), Quaternion.identity, _activeMenu.transform);
         _demoMarble.AddComponent<MarbleOrbitController>();
         SetMarbleTexture(0);
         SetMarbleTrail(0);
         SetMarbleHat(0);
-        _playerOptionsMenu.GetComponent<MenuVisibilityController>().Show();        
+        _activeMenu.GetComponent<MenuVisibilityController>().Show();        
     }
 
     // Update is called once per frame
@@ -144,15 +146,13 @@ public class SceneController : MonoBehaviour
                 break;
 
             case GameState.PLAYER1_OPTIONS:
-                _playerOptionsMenu.GetComponent<MenuVisibilityController>().Hide();
+                _activeMenu.GetComponent<MenuVisibilityController>().Hide();
 
                 Destroy(_demoMarble);
-                Destroy(_playerOptionsMenu, 0.25f);
+                Destroy(_activeMenu, 0.25f);
 
-                
-
-                _playerOptionsMenu = Instantiate(_player2OptionsMenuPrefab);
-                _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_playerOptionsMenu.transform.position.x, -0.55f, _playerOptionsMenu.transform.position.z), Quaternion.identity, _playerOptionsMenu.transform);
+                _activeMenu = Instantiate(_player2OptionsMenuPrefab);
+                _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_activeMenu.transform.position.x, -0.55f, _activeMenu.transform.position.z), Quaternion.identity, _activeMenu.transform);
                 _demoMarble.AddComponent<MarbleOrbitController>();
 
                 _currentState = GameState.PLAYER2_OPTIONS;
@@ -161,17 +161,39 @@ public class SceneController : MonoBehaviour
                 SetMarbleTrail(0);
                 SetMarbleHat(0);
 
-                _playerOptionsMenu.GetComponent<MenuVisibilityController>().Show();
+                _activeMenu.GetComponent<MenuVisibilityController>().Show();
                 break;
 
             case GameState.PLAYER2_OPTIONS:
-                _playerOptionsMenu.GetComponent<MenuVisibilityController>().Hide();
+                _activeMenu.GetComponent<MenuVisibilityController>().Hide();
 
                 Destroy(_demoMarble);
-                Destroy(_playerOptionsMenu, 0.25f);
+                Destroy(_activeMenu, 0.25f);
 
                 _currentState = GameState.PLAYER1_TURN;
                 SpawnPlayerMarble();
+                break;
+
+            case GameState.END_GAME:
+                _activeMenu.GetComponent<MenuVisibilityController>().Hide();
+                Destroy(_activeMenu, 0.25f);
+
+                foreach(GameObject obj in _player1Marbles) Destroy(obj);
+
+                foreach (GameObject obj in _player2Marbles) Destroy(obj);
+
+                _player1Marbles.Clear();
+                _player2Marbles.Clear();
+
+                _currentState = GameState.PLAYER1_OPTIONS;
+
+                _activeMenu = Instantiate(_player1OptionsMenuPrefab);
+                _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_activeMenu.transform.position.x, -0.55f, _activeMenu.transform.position.z), Quaternion.identity, _activeMenu.transform);
+                _demoMarble.AddComponent<MarbleOrbitController>();
+                SetMarbleTexture(0);
+                SetMarbleTrail(0);
+                SetMarbleHat(0);
+                _activeMenu.GetComponent<MenuVisibilityController>().Show();
                 break;
         }
     }
@@ -215,13 +237,21 @@ public class SceneController : MonoBehaviour
         }
 
         //End of game
-        if (_player2Marbles.Count >= 5)
+        if (_player2Marbles.Count >= 1)
         {
             _currentState = GameState.END_GAME;
+
+            _activeMenu = Instantiate(_scoreViewPrefab);
+            ScoreViewController script = _activeMenu.GetComponent<ScoreViewController>();            
+
             int score1 = CalculateScore(_player1Marbles);
             int score2 = CalculateScore(_player2Marbles);
-            Debug.Log(score1);
-            Debug.Log(score2);
+
+            script.SetPlayer1Score(score1);
+            script.SetPlayer2Score(score2);
+
+            if (score1 < score2) script.SetWinner("Player 1");
+            else script.SetWinner("Player 2");
         }
         else SpawnPlayerMarble();
     }
