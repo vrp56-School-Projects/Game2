@@ -15,7 +15,7 @@ public class ScoreViewController : MonoBehaviour
 
     public void SetWinner(string winner)
     {
-        _winnerTitle.GetComponent<TMPro.TextMeshPro>().text = winner + " Wins!";
+        _winnerTitle.GetComponent<TMPro.TextMeshPro>().text = winner;
     }
 
     public void SetPlayer1Score(int score)

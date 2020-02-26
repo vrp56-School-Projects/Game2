@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -334,7 +334,8 @@ MonoBehaviour:
     type: 3}
   _demoMarblePrefab: {fileID: 478818827253009833, guid: 58938d3b0a45b574eb8fab2164f0c8cc,
     type: 3}
-  _scoringMarble: {fileID: 0}
+  _scoringMarble: {fileID: 4134303879033943531, guid: b910d899036c02d418dbe00c5cf369de,
+    type: 3}
   _marbleStartPosition: {x: 0, y: 0, z: -2.95}
   _menuSpawnPosition: {x: 0, y: 0.5, z: -2.95}
   _boardSelectionMenuPrefab: {fileID: 3840263417126293469, guid: a0ffd6e72a57f664891fa3d6e78adc38,
