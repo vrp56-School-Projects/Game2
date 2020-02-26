@@ -330,8 +330,17 @@ public class SceneController : MonoBehaviour
             script.SetPlayer1Score(score1);
             script.SetPlayer2Score(score2);
 
-            if (score1 < score2) script.SetWinner("Player 1");
-            else script.SetWinner("Player 2");
+            if (score1 < score2)
+            {
+                script.SetWinner("Player 1 Wins!");
+            }
+            else if (score2 < score1)
+            {
+                script.SetWinner("Player 2 Wins!");
+            } else if (score1==score2)
+            {
+                script.SetWinner("It's a tie!");
+            }
         }
         else SpawnPlayerMarble();
     }
