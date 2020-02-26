@@ -62,7 +62,8 @@ public class SceneController : MonoBehaviour
 
     private GameObject _activeMenu;
 
-    public GameObject confirmButton;
+    public GameObject confirmButtonPrefab;
+    private GameObject _confirmButton = null;
 
     [SerializeField]
     private int _redScore, _whiteScore, _blackScore, _outOfBoundsScore;
@@ -265,9 +266,17 @@ public class SceneController : MonoBehaviour
     private void SpawnPlayerMarble()
     {
         GameObject marble = Instantiate(_playerMarblePrefab, _marbleStartPosition, Quaternion.identity);
-        Instantiate(confirmButton, _comfirmSpawnPosition, Quaternion.identity);
+
+        if (_confirmButton != null)
+        {
+            Destroy(_confirmButton);
+        }
+
+        _confirmButton = Instantiate(confirmButtonPrefab, _comfirmSpawnPosition, Quaternion.identity);
         
         MarbleController script = marble.GetComponent<MarbleController>();
+        _confirmButton.GetComponent<MarbleConfirmation>().SetMarbleController(script);
+
 
         switch (_currentState)
         {
@@ -285,14 +294,17 @@ public class SceneController : MonoBehaviour
                 _player2Marbles.Add(marble);
                 break;
         }
-        
+       
+
 
     }
 
     //Marble Controller designates the end of a player's turn
     public void EndTurn()
     {
-        switch(_currentState)
+        Destroy(_confirmButton);
+
+        switch (_currentState)
         {
             case GameState.PLAYER1_TURN:
                 _currentState = GameState.PLAYER2_TURN;
@@ -308,7 +320,7 @@ public class SceneController : MonoBehaviour
         {
             _currentState = GameState.END_GAME;
 
-            _activeMenu = Instantiate(_scoreViewPrefab);
+            _activeMenu = Instantiate(_scoreViewPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
             ScoreViewController script = _activeMenu.GetComponent<ScoreViewController>();            
 
             int score1 = CalculateScore(_player1Marbles);

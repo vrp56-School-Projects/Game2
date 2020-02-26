@@ -6,31 +6,20 @@ public class MarbleConfirmation : MonoBehaviour
 {
     [SerializeField]
     private AudioSource _audioSource;
+    private MarbleController _marbleController;
 
     private void OnMouseDown()
     {
         _audioSource.PlayOneShot(_audioSource.clip);
         //AudioSource.PlayClipAtPoint(_audioSource.clip, Camera.main.transform.position);
         //Gain access to the scene controller
-        GameObject[] objects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
 
-        //SceneController sceneControllerScript = null;
+        _marbleController.buttonPressed = true;
 
-        MarbleController marbleController = null;
+    }
 
-        foreach (GameObject obj in objects)
-        {
-            MarbleController ctrl = obj.GetComponentInChildren<MarbleController>();
-
-            if (ctrl != null)
-            {
-                marbleController = ctrl;
-                break;
-            }
-          
-        }
-
-        marbleController.buttonPressed = true;
-
+    public void SetMarbleController(MarbleController marbleController)
+    {
+        _marbleController = marbleController;
     }
 }

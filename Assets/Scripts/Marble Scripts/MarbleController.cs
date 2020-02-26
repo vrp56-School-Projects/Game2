@@ -103,53 +103,24 @@ public class MarbleController : MonoBehaviour
             _currentState = State.DIRECTION;
             _directionMarker = Instantiate(_directionMarker, this.transform.position, Quaternion.identity);
         }
-        //// Moving the Marble with the camera
-        //else
-        //{
-        //    Vector3 cameraLocation = Camera.main.transform.position;
-        //    this.transform.Translate(cameraLocation.x, this.transform.position.y, this.transform.position.z);
-        //    Vector3 pos = this.transform.position;
-
-        //    //Check bounds
-        //    if (pos.x < -_placementLimit)
-        //    {
-        //        pos.x = -_placementLimit;
-        //        this.transform.position = pos;
-        //    }
-        //    else if (pos.x > _placementLimit)
-        //    {
-        //        pos.x = _placementLimit;
-        //        this.transform.position = pos;
-        //    }
-        //}
-
-        //Moving Left
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        // Moving the Marble with the camera
+        else
         {
-            this.transform.Translate(Vector3.left * _placementSpeed * Time.deltaTime);
-
-            Vector3 pos = this.transform.position;
+            Vector3 marblePos = this.transform.position;
+            float x = Camera.main.transform.position.x;
 
             //Check bounds
-            if (pos.x < -_placementLimit)
+            if (x < -_placementLimit)
             {
-                pos.x = -_placementLimit;
-                this.transform.position = pos;
+                x = -_placementLimit;
             }
-        }
-        //Moving Right
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            this.transform.Translate(Vector3.right * _placementSpeed * Time.deltaTime);
-
-            Vector3 pos = this.transform.position;
-
-            //Check bounds
-            if (pos.x > _placementLimit)
+            else if (x > _placementLimit)
             {
-                pos.x = _placementLimit;
-                this.transform.position = pos;
+                x = _placementLimit;
             }
+
+            marblePos.x = x;
+            this.transform.position = marblePos;
         }
     }
 
