@@ -334,7 +334,8 @@ MonoBehaviour:
     type: 3}
   _demoMarblePrefab: {fileID: 478818827253009833, guid: 58938d3b0a45b574eb8fab2164f0c8cc,
     type: 3}
-  _scoringMarble: {fileID: 0}
+  _scoringMarble: {fileID: 4134303879033943531, guid: b910d899036c02d418dbe00c5cf369de,
+    type: 3}
   _marbleStartPosition: {x: 0, y: 0, z: -2.95}
   _menuSpawnPosition: {x: 0, y: 0.5, z: -2.95}
   _boardSelectionMenuPrefab: {fileID: 3840263417126293469, guid: a0ffd6e72a57f664891fa3d6e78adc38,
@@ -344,8 +345,6 @@ MonoBehaviour:
   _player2OptionsMenuPrefab: {fileID: 8614576937753966870, guid: 74d2652ec74ac7c48b4bef242d9b6a08,
     type: 3}
   _scoreViewPrefab: {fileID: 3840263417126293469, guid: d1397dc100cdd11419407437f884edf7,
-    type: 3}
-  _outOfBoundsFailPrefab: {fileID: 7923067007169122077, guid: 811f41f43fde736429d317a4ae6f4245,
     type: 3}
   _redScore: 1
   _whiteScore: 3
