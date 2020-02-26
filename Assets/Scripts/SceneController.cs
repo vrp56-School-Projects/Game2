@@ -27,6 +27,8 @@ public class SceneController : MonoBehaviour
     [SerializeField]
     private GameObject _scoringMarble;
 
+    private Vector3 _scoringMarbleStartPos;
+
     [SerializeField]
     private Vector3 _marbleStartPosition;
 
@@ -59,6 +61,8 @@ public class SceneController : MonoBehaviour
     private GameObject _player2OptionsMenuPrefab;
     [SerializeField]
     private GameObject _scoreViewPrefab;
+    [SerializeField]
+    private GameObject _outOfBoundsFailPrefab;
 
     private GameObject _activeMenu;
 
@@ -104,6 +108,9 @@ public class SceneController : MonoBehaviour
         m_PlaceOnPlaneScript.Scale();
 
         _selectedStage = Instantiate(_stages[0]);
+        _scoringMarble = _selectedStage.transform.Find("scoreMarblePrefab").gameObject;
+        _scoringMarbleStartPos = _scoringMarble.transform.position;
+        Debug.Log(_scoringMarbleStartPos);
         _activeMenu = Instantiate(_boardSelectionMenuPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
 
         //Create and show the menu with the orbiting marble
@@ -135,6 +142,8 @@ public class SceneController : MonoBehaviour
         _selectedStage = Instantiate(_stages[index], pos, quat);
 
         _scoringMarble = _selectedStage.transform.Find("scoreMarblePrefab").gameObject;
+        _scoringMarbleStartPos = _scoringMarble.transform.position;
+        Debug.Log(_scoringMarbleStartPos);
 
         //reparent the active menu
         _activeMenu.transform.SetParent(_selectedStage.transform);
@@ -211,6 +220,7 @@ public class SceneController : MonoBehaviour
                 break;
 
             case GameState.PLAYER1_OPTIONS:
+
                 _activeMenu.GetComponent<MenuVisibilityController>().Hide();
 
                 Destroy(_demoMarble);
@@ -307,11 +317,38 @@ public class SceneController : MonoBehaviour
         switch (_currentState)
         {
             case GameState.PLAYER1_TURN:
-                _currentState = GameState.PLAYER2_TURN;
+                if (Vector3.Distance(_scoringMarbleStartPos, _scoringMarble.transform.position) > 1.05f)
+                {
+                    _currentState = GameState.END_GAME;
+
+                    _activeMenu = Instantiate(_outOfBoundsFailPrefab);
+                    OutOfBoundsFailController script = _activeMenu.GetComponent<OutOfBoundsFailController>();
+
+                    script.SetWinner("Player 2");
+                    script.SetLoser("Player 1");
+                    return;
+                } else
+                {
+                    _currentState = GameState.PLAYER2_TURN;
+                }
                 break;
 
             case GameState.PLAYER2_TURN:
-                _currentState = GameState.PLAYER1_TURN;
+                if (Vector3.Distance(_scoringMarbleStartPos, _scoringMarble.transform.position) > 1.05f)
+                {
+                    _currentState = GameState.END_GAME;
+
+                    _activeMenu = Instantiate(_outOfBoundsFailPrefab);
+                    OutOfBoundsFailController script = _activeMenu.GetComponent<OutOfBoundsFailController>();
+
+                    script.SetWinner("Player 1");
+                    script.SetLoser("Player 2");
+                    return;
+                }
+                else
+                {
+                    _currentState = GameState.PLAYER1_TURN;
+                }
                 break;
         }
 
@@ -329,8 +366,17 @@ public class SceneController : MonoBehaviour
             script.SetPlayer1Score(score1);
             script.SetPlayer2Score(score2);
 
-            if (score1 < score2) script.SetWinner("Player 1");
-            else script.SetWinner("Player 2");
+            if (score1 < score2)
+            {
+                script.SetWinner("Player 1 Wins!");
+            }
+            else if (score2 < score1)
+            {
+                script.SetWinner("Player 2 Wins!");
+            } else if (score1==score2)
+            {
+                script.SetWinner("It's a tie!");
+            }
         }
         else SpawnPlayerMarble();
     }
