@@ -32,6 +32,14 @@ public class PlaceOnPlane : MonoBehaviour
 
     private bool isPlaced = false;
 
+    private static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
+
+    private ARSessionOrigin m_SessionOrigin;
+    private ARPlaneManager m_ARPlaneManager;
+    private ARRaycastManager m_RaycastManager;
+    private ARPointCloudManager m_ARPointCloudManager;
+    private SceneController m_sceneControllerScript;
+
 
     void Awake()
     {
@@ -40,7 +48,8 @@ public class PlaceOnPlane : MonoBehaviour
         m_RaycastManager = GetComponent<ARRaycastManager>();
         m_ARPointCloudManager = GetComponent<ARPointCloudManager>();
 
-        m_SessionOrigin.transform.localScale = new Vector3(10, 10, 10);
+        //m_SessionOrigin.transform.localScale = new Vector3(10, 10, 10);
+        //Scale();
     }
 
     private void StopPlaneDetection()
@@ -59,7 +68,7 @@ public class PlaceOnPlane : MonoBehaviour
         }
     }
 
-    private void Place()
+    public void Place()
     {
         if (Input.touchCount == 0 || m_PlacedPrefab == null)
             return;
@@ -83,6 +92,11 @@ public class PlaceOnPlane : MonoBehaviour
         }
     }
 
+    public void Scale()
+    {
+        m_SessionOrigin.transform.localScale = new Vector3(10, 10, 10);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -90,10 +104,5 @@ public class PlaceOnPlane : MonoBehaviour
         Place();
     }
 
-    static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
-    ARSessionOrigin m_SessionOrigin;
-    ARPlaneManager m_ARPlaneManager;
-    ARRaycastManager m_RaycastManager;
-    ARPointCloudManager m_ARPointCloudManager;
 }

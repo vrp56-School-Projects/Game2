@@ -38,6 +38,9 @@ public class MarbleController : MonoBehaviour
     private SceneController _sceneController;
     private bool _isDead = false;
 
+
+    public bool buttonPressed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +51,7 @@ public class MarbleController : MonoBehaviour
 
         foreach (GameObject obj in objects)
         {
-            ARSessionOrigin orig = obj.GetComponent<ARSessionOrigin>();
-            SceneController ctrl = orig.GetComponent<SceneController>();
+            SceneController ctrl = obj.GetComponentInChildren<SceneController>();
 
             if (ctrl != null)
             {
@@ -95,11 +97,32 @@ public class MarbleController : MonoBehaviour
     private void ManagePlacementState()
     {
         //location selected
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (buttonPressed)
         {
+            buttonPressed = false;
             _currentState = State.DIRECTION;
             _directionMarker = Instantiate(_directionMarker, this.transform.position, Quaternion.identity);
         }
+        //// Moving the Marble with the camera
+        //else
+        //{
+        //    Vector3 cameraLocation = Camera.main.transform.position;
+        //    this.transform.Translate(cameraLocation.x, this.transform.position.y, this.transform.position.z);
+        //    Vector3 pos = this.transform.position;
+
+        //    //Check bounds
+        //    if (pos.x < -_placementLimit)
+        //    {
+        //        pos.x = -_placementLimit;
+        //        this.transform.position = pos;
+        //    }
+        //    else if (pos.x > _placementLimit)
+        //    {
+        //        pos.x = _placementLimit;
+        //        this.transform.position = pos;
+        //    }
+        //}
+
         //Moving Left
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -122,7 +145,7 @@ public class MarbleController : MonoBehaviour
             Vector3 pos = this.transform.position;
 
             //Check bounds
-            if (pos.x >_placementLimit)
+            if (pos.x > _placementLimit)
             {
                 pos.x = _placementLimit;
                 this.transform.position = pos;
@@ -134,8 +157,9 @@ public class MarbleController : MonoBehaviour
     private void ManageDirectionState()
     {
         //Direction selected
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (buttonPressed)
         {
+            buttonPressed = false;
             DirectionMarkerController controller = _directionMarker.GetComponent<DirectionMarkerController>();
             controller.LockRotation();
 
@@ -156,8 +180,9 @@ public class MarbleController : MonoBehaviour
     //Manage player selection of marble shooting power
     private void ManagePowerState()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (buttonPressed)
         {
+            buttonPressed = false;
             PowerMarkerController controller = _powerMarker.GetComponent<PowerMarkerController>();
             controller.LockPower();
 

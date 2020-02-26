@@ -274,6 +274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f4c1b8ce05a61479d8ceed5b89ff9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stages:
+  - {fileID: 2046949384140986069, guid: 04024524665247a40b4a1692dc4914d4, type: 3}
+  - {fileID: 5338546838510003780, guid: cf3358d87f0097a4fad3f49b042b13e6, type: 3}
+  - {fileID: 8695102483948936713, guid: e93341926a5a55945b19dc3d5b6bae6b, type: 3}
+  - {fileID: 5021233966631353254, guid: 3e4edcea2ffaaec4590b15e61ad80d83, type: 3}
   _marbleTextures:
   - {fileID: 2100000, guid: 675d0ad90239d1f4b923cbbef1e3b326, type: 2}
   - {fileID: 2100000, guid: b639912729b109b4f88b8a641da8a8ef, type: 2}
@@ -297,9 +302,19 @@ MonoBehaviour:
     type: 3}
   _demoMarblePrefab: {fileID: 478818827253009833, guid: 58938d3b0a45b574eb8fab2164f0c8cc,
     type: 3}
-  _scoringMarblePrefab: {fileID: 0}
-  _marbleStartPosition: {x: 0, y: 0.03, z: -2.85}
-  _playerOptionsMenuPrefab: {fileID: 3840263417126293469, guid: f1e38e8c89a178e4dabd7b46961f8db2,
+  _scoringMarble: {fileID: 0}
+  _marbleStartPosition: {x: 0, y: 0, z: 1.15}
+  _menuSpawnPosition: {x: 0, y: 0.5, z: 0.85}
+  _comfirmSpawnPosition: {x: 0, y: -1, z: 0.85}
+  _boardSelectionMenuPrefab: {fileID: 3840263417126293469, guid: a0ffd6e72a57f664891fa3d6e78adc38,
+    type: 3}
+  _player1OptionsMenuPrefab: {fileID: 3840263417126293469, guid: f1e38e8c89a178e4dabd7b46961f8db2,
+    type: 3}
+  _player2OptionsMenuPrefab: {fileID: 8614576937753966870, guid: 74d2652ec74ac7c48b4bef242d9b6a08,
+    type: 3}
+  _scoreViewPrefab: {fileID: 3840263417126293469, guid: d1397dc100cdd11419407437f884edf7,
+    type: 3}
+  confirmButton: {fileID: 8482124189003392074, guid: 129c1ada059d2b34b98b0c3bad9307c3,
     type: 3}
   _redScore: 1
   _whiteScore: 3
@@ -389,7 +404,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054712509}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
@@ -404,7 +419,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054712509}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
@@ -418,7 +433,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054712509}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 678200858ac731a4aa9b1798c544c4c6, type: 3}
   m_Name: 

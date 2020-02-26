@@ -19,7 +19,7 @@ public class BoardOptionsController : MonoBehaviour
 
         foreach (GameObject obj in objects)
         {
-            SceneController ctrl = obj.GetComponent<SceneController>();
+            SceneController ctrl = obj.GetComponentInChildren<SceneController>();
 
             if (ctrl != null)
             {

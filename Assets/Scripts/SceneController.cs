@@ -33,6 +33,9 @@ public class SceneController : MonoBehaviour
     [SerializeField]
     private Vector3 _menuSpawnPosition;
 
+    [SerializeField]
+    private Vector3 _comfirmSpawnPosition;
+
     //Player 1 Information
     private List<GameObject> _player1Marbles;
     private int _player1TextureIndex;
@@ -59,6 +62,8 @@ public class SceneController : MonoBehaviour
 
     private GameObject _activeMenu;
 
+    public GameObject confirmButton;
+
     [SerializeField]
     private int _redScore, _whiteScore, _blackScore, _outOfBoundsScore;
 
@@ -77,11 +82,25 @@ public class SceneController : MonoBehaviour
     //Track the current game state
     private GameState _currentState = GameState.BOARD_SELECTION;
 
+    // AR variables
+
+    private ARSessionOrigin m_SessionOrigin;
+    private PlaceOnPlane m_PlaceOnPlaneScript;
+
     // Start is called before the first frame update
     void Start()
     {
         _player1Marbles = new List<GameObject>();
         _player2Marbles = new List<GameObject>();
+        
+        m_SessionOrigin = GetComponentInParent<ARSessionOrigin>();
+        //m_ARPlaneManager = GetComponentInParent<ARPlaneManager>();
+        //m_RaycastManager = GetComponentInParent<ARRaycastManager>();
+        //m_ARPointCloudManager = GetComponentInParent<ARPointCloudManager>();
+        
+
+        m_PlaceOnPlaneScript = this.GetComponentInParent<PlaceOnPlane>();
+        m_PlaceOnPlaneScript.Scale();
 
         _selectedStage = Instantiate(_stages[0]);
         _activeMenu = Instantiate(_boardSelectionMenuPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
@@ -246,6 +265,8 @@ public class SceneController : MonoBehaviour
     private void SpawnPlayerMarble()
     {
         GameObject marble = Instantiate(_playerMarblePrefab, _marbleStartPosition, Quaternion.identity);
+        Instantiate(confirmButton, _comfirmSpawnPosition, Quaternion.identity);
+        
         MarbleController script = marble.GetComponent<MarbleController>();
 
         switch (_currentState)
@@ -264,6 +285,8 @@ public class SceneController : MonoBehaviour
                 _player2Marbles.Add(marble);
                 break;
         }
+        
+
     }
 
     //Marble Controller designates the end of a player's turn
