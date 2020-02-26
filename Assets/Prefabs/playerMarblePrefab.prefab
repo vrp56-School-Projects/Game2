@@ -121,27 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373c667d1241bf54284a8332bafe5131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hatIds:
-  - {fileID: 0}
-  - {fileID: 1678697728494858, guid: dff0bf2755899aa42b52671dd5683233, type: 3}
-  - {fileID: 1981257420499984, guid: ff4fbc970ff92a647a6f0a9b9a6ab6d2, type: 3}
-  - {fileID: 1596853484811122, guid: 032fbc761864ad94ba07c78f0ccbb2a0, type: 3}
-  - {fileID: 1160420858043324, guid: dae77ae7b43f957448d5432414d26636, type: 3}
-  - {fileID: 1130866804316302, guid: c187fc3ea1549d84c846ce220fecb9ef, type: 3}
-  - {fileID: 1644363884628856, guid: d0b9009f4d67bc0429a106a40e46d39d, type: 3}
-  - {fileID: 1958457237189148, guid: c679c2da1e24e6b47aa8615de8a97aa0, type: 3}
-  - {fileID: 1687934591321452, guid: d7bb95bb746a0c44b9af9088e42d0357, type: 3}
-  - {fileID: 1644755479700824, guid: cde7566157232a142a4f4c8e9dd0216d, type: 3}
-  _hatIdTest: 3
-  _trailIds:
-  - {fileID: 0}
-  - {fileID: 2553959130032721259, guid: 11057b82e34a28542988700e2b03d4f1, type: 3}
-  - {fileID: 6169260738191477064, guid: 3a89f226b0b000041aa1553b3dcd3ad6, type: 3}
-  _trailIdTest: 2
   _directionMarker: {fileID: 1652489051567649476, guid: 56ef1ac3fce0c3346b67331529b8a7fe,
     type: 3}
   _powerMarker: {fileID: 1652489051567649476, guid: 5437e35697a75d647be4eaa72984420a,
     type: 3}
   _placementSpeed: 2
   _placementLimit: 1.7
-  _maxVelocity: 5.5
+  _maxVelocity: 10

@@ -12,9 +12,22 @@ public class CycleOptionController : MonoBehaviour
     [SerializeField]
     private string[] _optionNames;
 
+    enum OptionType
+    {
+        PLAYER_OPTIONS,
+        BOARD_OPTIONS
+    }
+
+    [SerializeField]
+    private OptionType _type = OptionType.PLAYER_OPTIONS;
+
     private TMPro.TextMeshPro _textMesh;
 
     private PlayerOptionsController _playerOptionsControllerScript;
+    private BoardOptionsController _boardOptionsControllerScript;
+
+    [SerializeField]
+    private AudioSource _audioSource;
 
     public GameObject SelectedOption;
 
@@ -22,6 +35,7 @@ public class CycleOptionController : MonoBehaviour
     void Start()
     {
         _playerOptionsControllerScript = this.GetComponentInParent<PlayerOptionsController>();
+        _boardOptionsControllerScript = this.GetComponentInParent<BoardOptionsController>();
 
         _textMesh = SelectedOption.GetComponent<TMPro.TextMeshPro>();
         _textMesh.text = _optionNames[_currentIndex];
@@ -33,7 +47,18 @@ public class CycleOptionController : MonoBehaviour
         _currentIndex = (_currentIndex + 1) % _optionNames.Length;
         _textMesh.text = _optionNames[_currentIndex];
 
-        _playerOptionsControllerScript.UpdateOptions();
+        _audioSource.PlayOneShot(_audioSource.clip);
+
+        switch(_type)
+        {
+            case OptionType.PLAYER_OPTIONS:
+                _playerOptionsControllerScript.UpdateOptions();
+                break;
+
+            case OptionType.BOARD_OPTIONS:
+                _boardOptionsControllerScript.UpdateBoard();
+                break;
+        }        
     }
 
     public void CycleLeft()
@@ -42,7 +67,18 @@ public class CycleOptionController : MonoBehaviour
         _currentIndex = (_currentIndex + _optionNames.Length - 1) % _optionNames.Length;
         _textMesh.text = _optionNames[_currentIndex];
 
-        _playerOptionsControllerScript.UpdateOptions();
+        _audioSource.PlayOneShot(_audioSource.clip);
+
+        switch (_type)
+        {
+            case OptionType.PLAYER_OPTIONS:
+                _playerOptionsControllerScript.UpdateOptions();
+                break;
+
+            case OptionType.BOARD_OPTIONS:
+                _boardOptionsControllerScript.UpdateBoard();
+                break;
+        }
     }
 
     public int GetCurrentIndex()
