@@ -40,6 +40,7 @@ public class MarbleController : MonoBehaviour
 
 
     public bool buttonPressed = false;
+    private bool _activateBarrier = false;
 
     // Start is called before the first frame update
     void Start()
@@ -86,7 +87,16 @@ public class MarbleController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_rigidBody.IsSleeping() && _currentState == State.INACTIVE && !_isDead)
+        //Only active when marble has been shot AND barrier is up
+        if (_currentState == State.INACTIVE && _activateBarrier)
+        {
+            if (transform.position.z < -2.7f)
+            {
+                _rigidBody.Sleep();
+            }
+        }
+
+        if (_rigidBody.IsSleeping() && _currentState == State.INACTIVE && !_isDead)
         {
             _isDead = true;
             _sceneController.EndTurn();
@@ -164,7 +174,16 @@ public class MarbleController : MonoBehaviour
             Destroy(_powerMarker);
 
             _currentState = State.INACTIVE;
+            StartCoroutine(ActivateBarrierTimer());
         }        
+    }
+
+    IEnumerator ActivateBarrierTimer()
+    {
+        //After 0.1 seconds, activate barrier to prevent 
+        //marbles from falling off the back of the board
+        yield return new WaitForSeconds(0.1f);
+        _activateBarrier = true;
     }
 
     public void SetHat(GameObject hat)
