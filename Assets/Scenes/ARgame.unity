@@ -314,6 +314,7 @@ MonoBehaviour:
     type: 3}
   _scoreViewPrefab: {fileID: 3840263417126293469, guid: d1397dc100cdd11419407437f884edf7,
     type: 3}
+  _outOfBoundsFailPrefab: {fileID: 0}
   confirmButtonPrefab: {fileID: 5846609331647929049, guid: f33c9c79590026842ac164cc81ebb87c,
     type: 3}
   _redScore: 1
@@ -438,8 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678200858ac731a4aa9b1798c544c4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlacedPrefab: {fileID: 6477376320900647734, guid: 38e3167f34fff2e47b2e6c1afbd4b9ae,
-    type: 3}
 --- !u!1 &1471433563
 GameObject:
   m_ObjectHideFlags: 0

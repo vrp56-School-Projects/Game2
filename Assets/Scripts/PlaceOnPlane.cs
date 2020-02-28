@@ -12,23 +12,10 @@ using UnityEngine.XR.ARSubsystems;
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlaceOnPlane : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("Instantiates this prefab on a plane at the touch location.")]
-    GameObject m_PlacedPrefab;
-
-    /// <summary>
-    /// The prefab to instantiate on touch.
-    /// </summary>
-    public GameObject placedPrefab
-    {
-        get { return m_PlacedPrefab; }
-        set { m_PlacedPrefab = value; }
-    }
-
     /// <summary>
     /// The object instantiated as a result of a successful raycast intersection with a plane.
     /// </summary>
-    public GameObject spawnedObject { get; private set; }
+    private GameObject m_spawnedObject;
 
     private bool isPlaced = false;
 
@@ -68,27 +55,39 @@ public class PlaceOnPlane : MonoBehaviour
         }
     }
 
-    public void Place()
+    public GameObject Place(GameObject spawnObject)
     {
-        if (Input.touchCount == 0 || m_PlacedPrefab == null)
-            return;
-
-        var touch = Input.GetTouch(0);
-
-
-        if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon) && !isPlaced)
+        if (Input.touchCount == 0 || spawnObject == null)
         {
-            // Raycast hits are sorted by distance, so the first one
-            // will be the closest hit.
-            var hitPose = s_Hits[0].pose;
+            return null;
+        }
+        else
+        {
+            var touch = Input.GetTouch(0);
 
-            
+            if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon) && !isPlaced)
+            {
+                // Raycast hits are sorted by distance, so the first one
+                // will be the closest hit.
+                var hitPose = s_Hits[0].pose;
 
-            spawnedObject = Instantiate(m_PlacedPrefab, hitPose.position, Quaternion.identity);
-            //m_SessionOrigin.MakeContentAppearAt(spawnedObject.transform, hitPose.position*10.0f);
-            isPlaced = true;
+                if (m_spawnedObject == null)
+                {
+                    Destroy(m_spawnedObject);
+                }
 
-            StopPlaneDetection();
+                m_spawnedObject = Instantiate(spawnObject, hitPose.position, Quaternion.identity);
+                //m_SessionOrigin.MakeContentAppearAt(spawnedObject.transform, hitPose.position*10.0f);
+                isPlaced = true;
+
+                StopPlaneDetection();
+                return m_spawnedObject;
+            }
+            else
+            {
+                // this probably fucked it up
+                return null;
+            }
         }
     }
 
@@ -101,7 +100,7 @@ public class PlaceOnPlane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Place();
+        //Place();
     }
 
 

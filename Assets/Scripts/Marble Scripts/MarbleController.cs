@@ -90,7 +90,7 @@ public class MarbleController : MonoBehaviour
         //Only active when marble has been shot AND barrier is up
         if (_currentState == State.INACTIVE && _activateBarrier)
         {
-            if (transform.position.z < -2.7f)
+            if (transform.position.z < 1f)
             {
                 _rigidBody.Sleep();
             }

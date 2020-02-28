@@ -88,8 +88,6 @@ public class SceneController : MonoBehaviour
     private GameState _currentState = GameState.BOARD_SELECTION;
 
     // AR variables
-
-    private ARSessionOrigin m_SessionOrigin;
     private PlaceOnPlane m_PlaceOnPlaneScript;
 
     // Start is called before the first frame update
@@ -97,17 +95,14 @@ public class SceneController : MonoBehaviour
     {
         _player1Marbles = new List<GameObject>();
         _player2Marbles = new List<GameObject>();
-        
-        m_SessionOrigin = GetComponentInParent<ARSessionOrigin>();
-        //m_ARPlaneManager = GetComponentInParent<ARPlaneManager>();
-        //m_RaycastManager = GetComponentInParent<ARRaycastManager>();
-        //m_ARPointCloudManager = GetComponentInParent<ARPointCloudManager>();
-        
+       
 
         m_PlaceOnPlaneScript = this.GetComponentInParent<PlaceOnPlane>();
         m_PlaceOnPlaneScript.Scale();
 
         _selectedStage = Instantiate(_stages[0]);
+        // Should place the first stage in AR at hitpoint
+        //_selectedStage = m_PlaceOnPlaneScript.Place(_stages[0]);
         _scoringMarble = _selectedStage.transform.Find("scoreMarblePrefab").gameObject;
         _scoringMarbleStartPos = _scoringMarble.transform.position;
         Debug.Log(_scoringMarbleStartPos);
@@ -140,6 +135,8 @@ public class SceneController : MonoBehaviour
         Destroy(_selectedStage);
 
         _selectedStage = Instantiate(_stages[index], pos, quat);
+        // Should place the first stage in AR at hitpoint
+        //_selectedStage = m_PlaceOnPlaneScript.Place(_stages[index]); 
 
         _scoringMarble = _selectedStage.transform.Find("scoreMarblePrefab").gameObject;
         _scoringMarbleStartPos = _scoringMarble.transform.position;
