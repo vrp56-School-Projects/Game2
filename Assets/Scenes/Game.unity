@@ -346,6 +346,8 @@ MonoBehaviour:
     type: 3}
   _scoreViewPrefab: {fileID: 3840263417126293469, guid: d1397dc100cdd11419407437f884edf7,
     type: 3}
+  _outOfBoundsFailPrefab: {fileID: 7923067007169122077, guid: 811f41f43fde736429d317a4ae6f4245,
+    type: 3}
   _redScore: 1
   _whiteScore: 3
   _blackScore: 5

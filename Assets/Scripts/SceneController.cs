@@ -37,6 +37,7 @@ public class SceneController : MonoBehaviour
 
     [SerializeField]
     private Vector3 _comfirmSpawnPosition;
+    private int _numMarbles = 5;
 
     //Player 1 Information
     private List<GameObject> _player1Marbles;
@@ -350,7 +351,7 @@ public class SceneController : MonoBehaviour
         }
 
         //End of game
-        if (_player2Marbles.Count >= 1)
+        if (_player2Marbles.Count >= _numMarbles)
         {
             _currentState = GameState.END_GAME;
 
