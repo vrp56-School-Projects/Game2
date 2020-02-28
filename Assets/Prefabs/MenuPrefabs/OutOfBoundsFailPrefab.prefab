@@ -97,8 +97,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
         type: 3}
+      propertyPath: m_text
+      value: Player y knocked the scoring marble out of bounds
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -0.3859843
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
+        type: 3}
       propertyPath: m_textInfo.characterCount
       value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
         type: 3}
@@ -109,36 +124,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
-        type: 3}
-      propertyPath: m_text
-      value: Player y knocked the scoring marble out of bounds
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
-        type: 3}
-      propertyPath: m_firstOverflowCharacterIndex
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811420646356826795, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
-        type: 3}
-      propertyPath: m_margin.w
-      value: -0.3859843
-      objectReference: {fileID: 0}
-    - target: {fileID: 3333037481369760098, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7223543624742374407, guid: 98a77af6ab1422f45ac3c9e6599d1b15,
         type: 3}
@@ -360,31 +345,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 686405600386573211, guid: 7041aa8afd709fd4e8545e058d2f3e42,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 686405600386573211, guid: 7041aa8afd709fd4e8545e058d2f3e42,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 686405600386573211, guid: 7041aa8afd709fd4e8545e058d2f3e42,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 686405600386573211, guid: 7041aa8afd709fd4e8545e058d2f3e42,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 686405600386573211, guid: 7041aa8afd709fd4e8545e058d2f3e42,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 686405600386573211, guid: 7041aa8afd709fd4e8545e058d2f3e42,
-        type: 3}
       propertyPath: m_text
       value: Player x Wins!
       objectReference: {fileID: 0}
@@ -393,10 +353,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 4531954746546858066, guid: 7041aa8afd709fd4e8545e058d2f3e42,
+    - target: {fileID: 686405600386573211, guid: 7041aa8afd709fd4e8545e058d2f3e42,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
+      propertyPath: m_textInfo.characterCount
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7250882848531307494, guid: 7041aa8afd709fd4e8545e058d2f3e42,
         type: 3}
