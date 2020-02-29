@@ -287,6 +287,7 @@ public class SceneController : MonoBehaviour
     {
         GameObject marble = Instantiate(_playerMarblePrefab, _selectedStage.transform);
         marble.transform.localPosition = _marbleStartPosition;
+        marble.transform.eulerAngles = _selectedStage.transform.eulerAngles;
 
         if (_confirmButton != null)
         {

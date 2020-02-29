@@ -228,6 +228,7 @@ public class MarbleController : MonoBehaviour
     {
         Destroy(_marbleHat);
         _marbleHat = Instantiate(hat, this.gameObject.transform, true);
+        _marbleHat.GetComponent<HatController>().SetRot(this.transform.eulerAngles.y);
     }
 
     public void SetTrail(GameObject trail)

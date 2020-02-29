@@ -6,10 +6,16 @@ public class HatController : MonoBehaviour
 {
     [SerializeField]
     private float _hatHeight = 0.05f;
+    private float _rotationY;
     // Start is called before the first frame update
     void Start()
     {
         transform.localScale = new Vector3(4f, 4f, 4f);
+    }
+
+    public void SetRot(float rotation)
+    {
+        _rotationY = rotation;
     }
 
     // Update is called once per frame
@@ -22,7 +28,7 @@ public class HatController : MonoBehaviour
             transform.eulerAngles = new Vector3(-90, transform.parent.eulerAngles.y, 0);
         } else
         {
-            transform.eulerAngles = new Vector3(-90, 0, 0);
+            transform.eulerAngles = new Vector3(-90, _rotationY, 0);
         }
         
     }
