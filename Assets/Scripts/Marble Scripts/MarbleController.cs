@@ -115,7 +115,9 @@ public class MarbleController : MonoBehaviour
         {
             buttonPressed = false;
             _currentState = State.DIRECTION;
-            _directionMarker = Instantiate(_directionMarker, this.transform.position, Quaternion.identity);
+            _directionMarker = Instantiate(_directionMarker, this.transform);
+            _directionMarker.transform.eulerAngles = this.transform.eulerAngles;
+            _directionMarker.transform.localScale = new Vector3(100f, 100f, 100f);
         }
         // Moving the Marble with the camera
         else
@@ -187,10 +189,11 @@ public class MarbleController : MonoBehaviour
             _direction = Quaternion.AngleAxis(angle, Vector3.up) * _direction;
             _direction = _direction.normalized;
 
-            _powerMarker = Instantiate(_powerMarker, this.transform.position, Quaternion.identity);
-            Vector3 angles = _powerMarker.transform.eulerAngles;
-            angles.y = angle;
-            _powerMarker.transform.eulerAngles = angles;
+            _powerMarker = Instantiate(_powerMarker, this.transform);
+            Vector3 angles = _powerMarker.transform.localEulerAngles;
+            angles.y = controller.GetRotationLocal();
+            _powerMarker.transform.localEulerAngles = angles;
+            _powerMarker.transform.localScale = new Vector3(120f, 120f, 100f);
 
             _currentState = State.POWER;
         }

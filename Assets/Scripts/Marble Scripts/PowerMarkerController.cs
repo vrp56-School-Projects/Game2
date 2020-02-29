@@ -7,11 +7,12 @@ public class PowerMarkerController : MonoBehaviour
     private int _scaleDirection = -1;
 
     [SerializeField]
-    private float _scaleSpeed = 10.0f;
+    private float _scaleSpeed = 175.0f;
 
     [SerializeField]
-    private float _minScale = 1.0f;
-    private float _maxScale = 10.0f;
+    private float _minScale = 10.0f;
+    [SerializeField]
+    private float _maxScale = 100.0f;
 
     private bool _powerLocked = false;
 

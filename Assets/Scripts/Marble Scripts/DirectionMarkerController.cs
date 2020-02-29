@@ -58,6 +58,11 @@ public class DirectionMarkerController : MonoBehaviour
 
     public float GetRotation()
     {
+        return this.transform.eulerAngles.y;
+    }
+
+    public float GetRotationLocal()
+    {
         return this.transform.localEulerAngles.y;
     }
 }

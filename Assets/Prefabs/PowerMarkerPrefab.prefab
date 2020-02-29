@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0871610190a310242b344743131c193f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scaleSpeed: 15
-  _minScale: 1
+  _scaleSpeed: 175
+  _minScale: 10
+  _maxScale: 100
 --- !u!1 &1652489053235798288
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,6 +113,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -189,6 +191,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
