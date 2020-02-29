@@ -19,6 +19,10 @@ public class MarbleController : MonoBehaviour
 
     private GameObject _marbleHat;
     private GameObject _marbleTrail;
+	
+	private AudioSource audioSource;
+	[SerializeField]
+	private AudioClip _wallSound, _marbleSound, _marbleSoundBonk;
 
     [SerializeField]
     private GameObject _directionMarker;
@@ -46,7 +50,7 @@ public class MarbleController : MonoBehaviour
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
-
+        audioSource = GetComponent<AudioSource>();
         //Gain access to the scene controller
         GameObject[] objects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
 
@@ -138,6 +142,34 @@ public class MarbleController : MonoBehaviour
             marblePos.z = -2.95f;
             this.transform.localPosition = marblePos;
         }
+    }
+	
+	// when marble hits something, make noise
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+        }
+        if (collision.relativeVelocity.magnitude > 0 && (collision.gameObject.tag == "marble") && (!_isDead)){
+			//plays noise based on how hard it hit something
+			double floaty = collision.relativeVelocity.magnitude / _maxVelocity;
+			float floaty1 = (float)floaty;
+			if (Random.Range(0,10) == 1){
+				floaty1 = floaty1 * 0.1f;
+				audioSource.PlayOneShot(_marbleSoundBonk, floaty1);
+			}
+			else{
+				audioSource.PlayOneShot(_marbleSound, floaty1);
+			}
+			
+			audioSource.PlayOneShot(_marbleSound, floaty1);
+		}
+		else if (collision.relativeVelocity.magnitude > 0 && (collision.gameObject.tag == "SideBoard")){
+			double floaty = collision.relativeVelocity.magnitude * 0.25;
+			float floaty1 = (float)floaty;
+			audioSource.PlayOneShot(_wallSound, floaty1);
+		}
     }
 
     //Manage player selection of marble shooting direction
