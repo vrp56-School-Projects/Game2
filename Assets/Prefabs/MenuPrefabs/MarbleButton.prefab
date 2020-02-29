@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8482124189003392270}
   - component: {fileID: 8482124189003392713}
   - component: {fileID: 3153143406754479385}
+  - component: {fileID: 4779133500505684127}
   m_Layer: 0
   m_Name: MarbleButton
   m_TagString: Untagged
@@ -27,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8482124189003392074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 4, y: 0.5, z: 0.25}
   m_Children:
   - {fileID: 8482124189003392477}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!33 &8482124189003392694
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -108,6 +109,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 8482124189003392559}
+--- !u!114 &4779133500505684127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482124189003392074}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d44aa9709783644b638f6d0cca55fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstPersonCamera: {fileID: 0}
 --- !u!1 &8482124189003392434
 GameObject:
   m_ObjectHideFlags: 0

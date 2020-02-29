@@ -303,9 +303,10 @@ MonoBehaviour:
   _demoMarblePrefab: {fileID: 478818827253009833, guid: 58938d3b0a45b574eb8fab2164f0c8cc,
     type: 3}
   _scoringMarble: {fileID: 0}
-  _marbleStartPosition: {x: 0, y: 0, z: 1.15}
-  _menuSpawnPosition: {x: 0, y: 0.5, z: 0.85}
-  _comfirmSpawnPosition: {x: 0, y: -1, z: 0.5}
+  _marbleStartPosition: {x: 0, y: 0.5, z: -3}
+  _menuSpawnPosition: {x: 0, y: 0.75, z: -2.95}
+  _menuOffset: {x: 0, y: 3, z: 0}
+  _comfirmSpawnPosition: {x: 0, y: -1, z: -3}
   _boardSelectionMenuPrefab: {fileID: 3840263417126293469, guid: a0ffd6e72a57f664891fa3d6e78adc38,
     type: 3}
   _player1OptionsMenuPrefab: {fileID: 3840263417126293469, guid: f1e38e8c89a178e4dabd7b46961f8db2,
@@ -314,8 +315,9 @@ MonoBehaviour:
     type: 3}
   _scoreViewPrefab: {fileID: 3840263417126293469, guid: d1397dc100cdd11419407437f884edf7,
     type: 3}
-  _outOfBoundsFailPrefab: {fileID: 0}
-  confirmButtonPrefab: {fileID: 5846609331647929049, guid: f33c9c79590026842ac164cc81ebb87c,
+  _outOfBoundsFailPrefab: {fileID: 7923067007169122077, guid: 811f41f43fde736429d317a4ae6f4245,
+    type: 3}
+  confirmButtonPrefab: {fileID: 8482124189003392074, guid: 129c1ada059d2b34b98b0c3bad9307c3,
     type: 3}
   _redScore: 1
   _whiteScore: 3
@@ -405,7 +407,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054712509}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
@@ -420,7 +422,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054712509}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
@@ -434,7 +436,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054712509}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 678200858ac731a4aa9b1798c544c4c6, type: 3}
   m_Name: 

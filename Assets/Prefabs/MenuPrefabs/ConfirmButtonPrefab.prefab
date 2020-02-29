@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1201978307811406226}
   - component: {fileID: 948711838662662271}
   - component: {fileID: 8426593551049442294}
-  - component: {fileID: 8264795566240470529}
   - component: {fileID: 8809456105253670225}
   m_Layer: 0
   m_Name: ConfirmButtonPrefab
@@ -96,19 +95,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &8264795566240470529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5846609331647929049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e95ab616c5a4d4ba3d5a7219a4c5ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioSource: {fileID: 3128384309383638005}
 --- !u!114 &8809456105253670225
 MonoBehaviour:
   m_ObjectHideFlags: 0

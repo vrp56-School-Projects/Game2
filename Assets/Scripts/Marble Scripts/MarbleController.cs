@@ -90,7 +90,7 @@ public class MarbleController : MonoBehaviour
         //Only active when marble has been shot AND barrier is up
         if (_currentState == State.INACTIVE && _activateBarrier)
         {
-            if (transform.position.z < 1f)
+            if (transform.localPosition.z < -2.8f)
             {
                 _rigidBody.Sleep();
             }
@@ -116,21 +116,27 @@ public class MarbleController : MonoBehaviour
         // Moving the Marble with the camera
         else
         {
-            Vector3 marblePos = this.transform.position;
             float x = Camera.main.transform.position.x;
+            float z = Camera.main.transform.position.z;
+
+            this.transform.position = new Vector3(x, this.transform.position.y, z);
+            Vector3 marblePos = this.transform.localPosition;
+
+            float localX = marblePos.x;
 
             //Check bounds
-            if (x < -_placementLimit)
+            if (localX < -_placementLimit)
             {
-                x = -_placementLimit;
+                localX = -_placementLimit;
             }
-            else if (x > _placementLimit)
+            else if (localX > _placementLimit)
             {
-                x = _placementLimit;
+                localX = _placementLimit;
             }
 
-            marblePos.x = x;
-            this.transform.position = marblePos;
+            marblePos.x = localX;
+            marblePos.z = -2.95f;
+            this.transform.localPosition = marblePos;
         }
     }
 

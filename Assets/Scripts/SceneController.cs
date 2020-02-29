@@ -36,6 +36,9 @@ public class SceneController : MonoBehaviour
     private Vector3 _menuSpawnPosition;
 
     [SerializeField]
+    private Vector3 _menuOffset;
+
+    [SerializeField]
     private Vector3 _comfirmSpawnPosition;
     private int _numMarbles = 5;
 
@@ -86,7 +89,7 @@ public class SceneController : MonoBehaviour
     }
 
     //Track the current game state
-    private GameState _currentState = GameState.BOARD_SELECTION;
+    private GameState _currentState = GameState.BOARD_PLACEMENT;
 
     // AR variables
     private PlaceOnPlane m_PlaceOnPlaneScript;
@@ -102,21 +105,22 @@ public class SceneController : MonoBehaviour
         m_PlaceOnPlaneScript.Scale();
 
         _selectedStage = Instantiate(_stages[0]);
-        // Should place the first stage in AR at hitpoint
-        //_selectedStage = m_PlaceOnPlaneScript.Place(_stages[0]);
-        _scoringMarble = _selectedStage.transform.Find("scoreMarblePrefab").gameObject;
-        _scoringMarbleStartPos = _scoringMarble.transform.position;
-        Debug.Log(_scoringMarbleStartPos);
-        _activeMenu = Instantiate(_boardSelectionMenuPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
 
-        //Create and show the menu with the orbiting marble
-        //_activeMenu = Instantiate(_player1OptionsMenuPrefab);
-        //_demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_activeMenu.transform.position.x, -0.55f, _activeMenu.transform.position.z), Quaternion.identity, _activeMenu.transform);
-        //_demoMarble.AddComponent<MarbleOrbitController>();
-        //SetMarbleTexture(0);
-        //SetMarbleTrail(0);
-        //SetMarbleHat(0);
-        _activeMenu.GetComponent<MenuVisibilityController>().Show();        
+        m_PlaceOnPlaneScript.SetObject(_selectedStage);
+
+       
+    }
+    
+    public void BoardPlacementComplete()
+    {
+        _currentState = GameState.BOARD_SELECTION;
+
+        _activeMenu = Instantiate(_boardSelectionMenuPrefab, _selectedStage.transform);
+        _activeMenu.transform.localPosition = _menuSpawnPosition;
+        _activeMenu.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        _activeMenu.GetComponent<MenuVisibilityController>().Show();
+
+        SetStage(0);
     }
 
     // Update is called once per frame
@@ -145,6 +149,8 @@ public class SceneController : MonoBehaviour
 
         //reparent the active menu
         _activeMenu.transform.SetParent(_selectedStage.transform);
+        _activeMenu.transform.localPosition = _menuSpawnPosition;
+        _activeMenu.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     //Displays the selected texture on the demo marble and updates the corresponding player's selected texture
@@ -204,9 +210,11 @@ public class SceneController : MonoBehaviour
                 _activeMenu.GetComponent<MenuVisibilityController>().Hide();
                 Destroy(_activeMenu, 0.25f);
 
-                _activeMenu = Instantiate(_player1OptionsMenuPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
+                _activeMenu = Instantiate(_player1OptionsMenuPrefab, _selectedStage.transform);
+                _activeMenu.transform.localPosition = _menuSpawnPosition + _menuOffset;
                 _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_activeMenu.transform.position.x, -0.55f, _activeMenu.transform.position.z), Quaternion.identity, _activeMenu.transform);
                 _demoMarble.AddComponent<MarbleOrbitController>();
+                _activeMenu.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
                 _currentState = GameState.PLAYER1_OPTIONS;
 
@@ -224,9 +232,11 @@ public class SceneController : MonoBehaviour
                 Destroy(_demoMarble);
                 Destroy(_activeMenu, 0.25f);
 
-                _activeMenu = Instantiate(_player2OptionsMenuPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
+                _activeMenu = Instantiate(_player2OptionsMenuPrefab, _selectedStage.transform);
+                _activeMenu.transform.localPosition = _menuSpawnPosition + _menuOffset;
                 _demoMarble = Instantiate(_demoMarblePrefab, new Vector3(_activeMenu.transform.position.x, -0.55f, _activeMenu.transform.position.z), Quaternion.identity, _activeMenu.transform);
                 _demoMarble.AddComponent<MarbleOrbitController>();
+                _activeMenu.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 
                 _currentState = GameState.PLAYER2_OPTIONS;
 
@@ -262,7 +272,9 @@ public class SceneController : MonoBehaviour
 
                 
 
-                _activeMenu = Instantiate(_boardSelectionMenuPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
+                _activeMenu = Instantiate(_boardSelectionMenuPrefab, _selectedStage.transform);
+                _activeMenu.transform.localPosition = _menuSpawnPosition;
+                _activeMenu.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                 SetStage(0);
 
                 _activeMenu.GetComponent<MenuVisibilityController>().Show();
@@ -273,15 +285,17 @@ public class SceneController : MonoBehaviour
     //Instantiate a new player marble for the active player with their selected options.
     private void SpawnPlayerMarble()
     {
-        GameObject marble = Instantiate(_playerMarblePrefab, _marbleStartPosition, Quaternion.identity);
+        GameObject marble = Instantiate(_playerMarblePrefab, _selectedStage.transform);
+        marble.transform.localPosition = _marbleStartPosition;
 
         if (_confirmButton != null)
         {
             Destroy(_confirmButton);
         }
 
-        _confirmButton = Instantiate(confirmButtonPrefab, _comfirmSpawnPosition, Quaternion.identity);
-        
+        _confirmButton = Instantiate(confirmButtonPrefab, _selectedStage.transform);
+        _confirmButton.transform.localPosition = _comfirmSpawnPosition;
+
         MarbleController script = marble.GetComponent<MarbleController>();
         _confirmButton.GetComponent<MarbleConfirmation>().SetMarbleController(script);
 
@@ -319,7 +333,8 @@ public class SceneController : MonoBehaviour
                 {
                     _currentState = GameState.END_GAME;
 
-                    _activeMenu = Instantiate(_outOfBoundsFailPrefab);
+                    _activeMenu = Instantiate(_outOfBoundsFailPrefab, _selectedStage.transform);
+                    _activeMenu.transform.localPosition = _menuSpawnPosition;
                     OutOfBoundsFailController script = _activeMenu.GetComponent<OutOfBoundsFailController>();
 
                     script.SetWinner("Player 2");
@@ -336,7 +351,8 @@ public class SceneController : MonoBehaviour
                 {
                     _currentState = GameState.END_GAME;
 
-                    _activeMenu = Instantiate(_outOfBoundsFailPrefab);
+                    _activeMenu = Instantiate(_outOfBoundsFailPrefab, _selectedStage.transform);
+                    _activeMenu.transform.localPosition = _menuSpawnPosition;
                     OutOfBoundsFailController script = _activeMenu.GetComponent<OutOfBoundsFailController>();
 
                     script.SetWinner("Player 1");
@@ -355,7 +371,9 @@ public class SceneController : MonoBehaviour
         {
             _currentState = GameState.END_GAME;
 
-            _activeMenu = Instantiate(_scoreViewPrefab, _menuSpawnPosition, Quaternion.identity, _selectedStage.transform);
+            _activeMenu = Instantiate(_scoreViewPrefab, _selectedStage.transform);
+            _activeMenu.transform.localPosition = _menuSpawnPosition;
+            _activeMenu.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             ScoreViewController script = _activeMenu.GetComponent<ScoreViewController>();            
 
             int score1 = CalculateScore(_player1Marbles);

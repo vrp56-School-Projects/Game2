@@ -15,9 +15,10 @@ public class PlaceOnPlane : MonoBehaviour
     /// <summary>
     /// The object instantiated as a result of a successful raycast intersection with a plane.
     /// </summary>
-    private GameObject m_spawnedObject;
+    private GameObject spawnObject;
 
     private bool isPlaced = false;
+    private Vector2 rayPos;
 
     private static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
@@ -39,6 +40,11 @@ public class PlaceOnPlane : MonoBehaviour
         //Scale();
     }
 
+    public void SetObject(GameObject board)
+    {
+        spawnObject = board;
+    }
+
     private void StopPlaneDetection()
     {
         m_ARPointCloudManager.enabled = false;
@@ -55,40 +61,20 @@ public class PlaceOnPlane : MonoBehaviour
         }
     }
 
-    public GameObject Place(GameObject spawnObject)
-    {
-        if (Input.touchCount == 0 || spawnObject == null)
+    public void Place()
+    {   
+        var touch = Input.GetTouch(0);
+
+        if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
         {
-            return null;
+            
+            isPlaced = true;
+            
+
+            StopPlaneDetection();
+            m_SessionOrigin.GetComponentInChildren<SceneController>().BoardPlacementComplete();
         }
-        else
-        {
-            var touch = Input.GetTouch(0);
-
-            if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon) && !isPlaced)
-            {
-                // Raycast hits are sorted by distance, so the first one
-                // will be the closest hit.
-                var hitPose = s_Hits[0].pose;
-
-                if (m_spawnedObject == null)
-                {
-                    Destroy(m_spawnedObject);
-                }
-
-                m_spawnedObject = Instantiate(spawnObject, hitPose.position, Quaternion.identity);
-                //m_SessionOrigin.MakeContentAppearAt(spawnedObject.transform, hitPose.position*10.0f);
-                isPlaced = true;
-
-                StopPlaneDetection();
-                return m_spawnedObject;
-            }
-            else
-            {
-                // this probably fucked it up
-                return null;
-            }
-        }
+        
     }
 
     public void Scale()
@@ -100,7 +86,27 @@ public class PlaceOnPlane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Place();
+        if (spawnObject == null)
+            return;
+
+
+        rayPos = new Vector2(Screen.width / 2, Screen.height / 2);
+
+        if (m_RaycastManager.Raycast(rayPos, s_Hits, TrackableType.PlaneWithinBounds) && !isPlaced)
+        {
+            Vector3 pt = new Vector3 (s_Hits[0].pose.position.x, s_Hits[0].pose.position.y, s_Hits[0].pose.position.z);
+            
+            // Now lerp to the position                                         
+            spawnObject.transform.position = Vector3.Lerp(spawnObject.transform.position, pt,
+              Time.smoothDeltaTime * 20f);
+
+            // get board to face camera
+            spawnObject.transform.LookAt(Camera.main.transform.position, Vector3.up);
+            spawnObject.transform.localEulerAngles = new Vector3(0, spawnObject.transform.localEulerAngles.y, 0);
+            spawnObject.transform.Rotate(0, 180f, 0, Space.Self);
+        }
+
+        Place();
     }
 
 

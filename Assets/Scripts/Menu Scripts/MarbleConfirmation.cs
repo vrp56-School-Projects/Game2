@@ -22,4 +22,13 @@ public class MarbleConfirmation : MonoBehaviour
     {
         _marbleController = marbleController;
     }
+
+    private void Update()
+    {
+        //Vector3 buttonPos = this.transform.localPosition;
+        //float x = Camera.main.transform.position.x;
+
+        //buttonPos.x = x;
+        //this.transform.localPosition = buttonPos;
+    }
 }
