@@ -122,8 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373c667d1241bf54284a8332bafe5131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallSound: {fileID: 8300000, guid: 99348d26b121bdf40bca2ff30b000207, type: 3}
-  _marbleSound: {fileID: 8300000, guid: 8c258dca7e08fb1438113b0b75348f71, type: 3}
+  _wallSound: {fileID: 8300000, guid: 8c258dca7e08fb1438113b0b75348f71, type: 3}
+  _marbleSound: {fileID: 8300000, guid: 99348d26b121bdf40bca2ff30b000207, type: 3}
+  _marbleSoundBonk: {fileID: 8300000, guid: cb6c263fdbb4ede4fb0bf44049f1acae, type: 3}
   _directionMarker: {fileID: 1652489051567649476, guid: 56ef1ac3fce0c3346b67331529b8a7fe,
     type: 3}
   _powerMarker: {fileID: 1652489051567649476, guid: 5437e35697a75d647be4eaa72984420a,

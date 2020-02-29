@@ -21,7 +21,7 @@ public class MarbleController : MonoBehaviour
 	
 	private AudioSource audioSource;
 	[SerializeField]
-	private AudioClip _wallSound, _marbleSound;
+	private AudioClip _wallSound, _marbleSound, _marbleSoundBonk;
 
     [SerializeField]
     private GameObject _directionMarker;
@@ -150,10 +150,18 @@ public class MarbleController : MonoBehaviour
         {
             Debug.DrawRay(contact.point, contact.normal, Color.white);
         }
-        if (collision.relativeVelocity.magnitude > 0 && (collision.gameObject.tag == "marble")){
+        if (collision.relativeVelocity.magnitude > 0 && (collision.gameObject.tag == "marble") && (!_isDead)){
 			//plays noise based on how hard it hit something
-			double floaty = collision.relativeVelocity.magnitude * 0.25;
+			double floaty = collision.relativeVelocity.magnitude / _maxVelocity;
 			float floaty1 = (float)floaty;
+			if (Random.Range(0,10) == 1){
+				floaty1 = floaty1 * 0.1f;
+				audioSource.PlayOneShot(_marbleSoundBonk, floaty1);
+			}
+			else{
+				audioSource.PlayOneShot(_marbleSound, floaty1);
+			}
+			
 			audioSource.PlayOneShot(_marbleSound, floaty1);
 		}
 		else if (collision.relativeVelocity.magnitude > 0 && (collision.gameObject.tag == "SideBoard")){
