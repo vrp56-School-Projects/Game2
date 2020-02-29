@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 4598233330316168334}
   - component: {fileID: 4598233330316168329}
   - component: {fileID: 3460531202277559413}
+  - component: {fileID: 82350267942150996}
   m_Layer: 0
   m_Name: playerMarblePrefab
-  m_TagString: Untagged
+  m_TagString: marble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4598233330316168331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.001, y: 0.6764, z: -9.607}
-  m_LocalScale: {x: 0.013, y: 0.013, z: 0.013}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a484ddac7e690ac4f8b168a0e1b253be, type: 2}
+  - {fileID: 2100000, guid: 675d0ad90239d1f4b923cbbef1e3b326, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,9 +102,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4598233330316168331}
   serializedVersion: 2
-  m_Mass: 0.0039916127
+  m_Mass: 3
   m_Drag: 0.3
-  m_AngularDrag: 0.5
+  m_AngularDrag: 0.3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -121,7 +122,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373c667d1241bf54284a8332bafe5131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wallSound: {fileID: 8300000, guid: 8c258dca7e08fb1438113b0b75348f71, type: 3}
+  _marbleSound: {fileID: 8300000, guid: 99348d26b121bdf40bca2ff30b000207, type: 3}
+  _marbleSoundBonk: {fileID: 8300000, guid: cb6c263fdbb4ede4fb0bf44049f1acae, type: 3}
   _directionMarker: {fileID: 1652489051567649476, guid: 56ef1ac3fce0c3346b67331529b8a7fe,
     type: 3}
-  force: 0.005
-  direction: {x: 0, y: 0, z: 0.5}
+  _powerMarker: {fileID: 1652489051567649476, guid: 5437e35697a75d647be4eaa72984420a,
+    type: 3}
+  _placementSpeed: 2
+  _placementLimit: 1.7
+  _maxVelocity: 10
+--- !u!82 &82350267942150996
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598233330316168331}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
