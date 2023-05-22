@@ -42,4 +42,3 @@ Once both players have finalized their settings, the competition begins. The pla
 
 The APK of the game can be downloaded [here](https://drive.google.com/file/d/1xLdMYatewBzxmCQs6Mgx8Svhbo9Xn12I/view?usp=sharing "here").
 
-If you do not have a compatible device, you can view a gameplay video [here](https://drive.google.com/file/d/1Xebmd4lktli-lX-jQvA3jPh1_3rCNkeJ/view?usp=sharing "here").
